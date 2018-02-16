@@ -1,0 +1,20 @@
+drop table users;
+drop table typeuser;
+
+create table typeuser(
+ type decimal(1) primary key,
+ description varchar(15) not null
+ );
+insert into typeuser values (1,'Administrator');
+insert into typeuser values (2,'Users');
+create table users(
+ email  varchar(50) primary key,
+ pwd  varchar(32) not null,
+ type decimal(1) not null ,
+ accessfail ENUM ('1','2','3','0'),
+ datecreation date,
+ datelastaccess date,
+ locked ENUM('S','N'),
+ active ENUM('S','N')    
+);
+alter table users add constraint fk_users_type foreign key(type) references typeuser(type);
