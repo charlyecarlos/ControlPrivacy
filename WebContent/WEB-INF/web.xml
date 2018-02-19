@@ -18,7 +18,15 @@
     <url-pattern>/Validation</url-pattern>
   </servlet-mapping>
   <context-param>
-    <param-name>dirUploadFiles</param-name>
-    <param-value>dir/</param-value>
+    <param-name>dirWatermark</param-name>
+    <param-value>dir/watermark</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dirViewImage</param-name>
+    <param-value>dir/viewImage</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dirFileAnalyse</param-name>
+    <param-value>dir/fileAnalyse</param-value>
   </context-param>
 </web-app>

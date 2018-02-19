@@ -6,15 +6,13 @@ import exceptions.DomainException;
 import util.Validator;
 
 public class User {
-	private static final String ERM_us = "us no valido";
-	private static final int us_MIN = 1;
-	private static final int us_MAX = 15;
-	private static final String ERM_password = "contraseña no valida";
-	private static final int password_MIN = 1;
-	private static final int password_MAX = 32;
 	private static final String ERM_email = "Email no valido";
 	private static final int email_MIN = 1;
 	private static final int email_MAX = 50;
+	
+	private static final String ERM_password = "contraseña no valida";
+	private static final int password_MIN = 1;
+	private static final int password_MAX = 32;
 	
 	private static final String ERM_question = "la question no  es valida es muy larga ó es obligatoria ";
 	private static final int question_MIN = 1;
@@ -36,7 +34,6 @@ public class User {
 	private static final String ERM_locked = "Locked no valido";
 	private static final int locked_MIN = 1;
 	private static final int locked_MAX = 1;
-	
 	
 	
 	private  String email;

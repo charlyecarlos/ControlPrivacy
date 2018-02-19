@@ -1,5 +1,10 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="domain.TimeImage"%>
+<%@page import="services.ServiceTimeImage"%>
+<%@page import="java.util.List" %>
+<%@page errorPage="internalError.jsp"%>
 <html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
 <head>
 	<meta name='author' content='Carlos Campos' />
@@ -21,15 +26,15 @@
 
 	<!-- MENU -->
 	<%@ include file="snippet/header/header.jsp" %>
-	<!-- FIN MENU -->
+	<!-- END MENU -->
 
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>View Image</h1>
 			<br>
-			<form method="post" action="#" enctype="multipart/form-data">
+			<form method="post" action="viewImage" enctype="multipart/form-data">
 				<div class="form-group">
-					<div class="input-group input-file" name="imageFile">
+					<div class="input-group input-image" name="imageFile">
 			    		<input type="text" class="form-control" placeholder='Choose a file...' />
 						<span class="input-group-btn">
 			        		<button class="btn btn-default btn-choose" type="button">Choose</button>
@@ -37,8 +42,12 @@
 					</div>
 					<br>
 					<select name="viewImage" class="form-control">
-						<%for(int i=2;i<26;i+=2){%>
-							<option value="<%=i%>"><%=i%> horas</option>
+						<%
+						ServiceTimeImage stimeimage=new ServiceTimeImage();
+						List<TimeImage> timeimages=stimeimage.recoverAllTimeImage();
+						for(TimeImage timeimage:timeimages){
+						%>
+							<option value="<%=timeimage.getMinutes()%>"><%=timeimage.getDescription()%> to expire</option>
 						<%}%>
 					</select>					
 				</div>
@@ -58,7 +67,7 @@
 
 	<!-- FOOTER -->
 	<%@ include file="snippet/footer/footer.jsp" %>
-	<!-- FIN FOOTER -->
+	<!-- END FOOTER -->
 			
 	<%if(session.isNew()){%>
 		<!-- COOKIE -->

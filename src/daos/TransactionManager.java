@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import daos.MySQL.MySQL_TimeImageDAO;
 import exceptions.ServiceException;
 
 
@@ -83,8 +84,8 @@ public class TransactionManager {
 		}
 	}
 	
-	public TypeUserDAO getTypeUserDAO(){
-		return new TypeUserDAO(con);
+	public MySQL_TimeImageDAO getTimeImageDAO(){
+		return new MySQL_TimeImageDAO(con);
 	}
 	
 	

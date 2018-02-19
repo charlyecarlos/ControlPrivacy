@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import services.ServiceUser;
+import services.ServiceTimeImage;
 
 import domain.User;
 import encrypt.EncryptMD5;
@@ -33,11 +33,11 @@ public class Validation extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String output="";
-		ServiceUser suser=new ServiceUser();
+		ServiceTimeImage suser=new ServiceTimeImage();
 		User user;
 		try {
 			user=new User(request.getParameter("username"));
-			user=suser.recoverUserComplete(user);
+//			user=suser.recoverUserComplete(user);
 			
 			if (user.getLocked().equals("S")){
 				request.setAttribute("user", user);
@@ -69,12 +69,12 @@ public class Validation extends HttpServlet {
 	request.getRequestDispatcher(output).forward(request, response);
 	}
 	
-	private boolean validateUser(User user,ServiceUser suser,HttpServletRequest request) throws ServiceException {
+	private boolean validateUser(User user,ServiceTimeImage suser,HttpServletRequest request) throws ServiceException {
 		String password=EncryptMD5.encryptMD5(request.getParameter("password"));
 		if(password.equals(user.getPassword()))
 			return true;
 		else{
-			suser.incrementFail(user);
+//			suser.incrementFail(user);
 			return false;
 		}
 	}

@@ -18,7 +18,7 @@
 
 	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
 	<script type='text/javascript' src='js/inputFile.js'></script>
-	<link rel='stylesheet' type='text/css' href='css/successfullyCompleted.css'>
+	<link rel='stylesheet' type='text/css' href='css/viewImage.css'>
 	<script type='text/javascript' src='js/downloadWatermark.js'></script>
 	
 

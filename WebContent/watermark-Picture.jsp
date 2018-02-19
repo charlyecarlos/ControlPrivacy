@@ -33,7 +33,7 @@
 			<br>
 			<form method="post" action="CreateSimpleWatermark" enctype="multipart/form-data">
 				<div class="form-group">
-					<div class="input-group input-file" name="imageFile">
+					<div class="input-group input-image" name="imageFile">
 			    		<input type="text" class="form-control" placeholder='Choose a file...' />
 						<span class="input-group-btn">
 			        		<button class="btn btn-default btn-choose" type="button">Choose</button>

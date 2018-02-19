@@ -18,9 +18,9 @@
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
 </head>
 
-<body class="bg-dark">
+<body class="bg-light">
   <div class="container">
-    <div class="card card-register mx-auto mt-5">
+    <div class="shadow card card-register mx-auto mt-5">
       <h1 class="card-header login text-center">Register an Account</h1>
       <div class="card-body">
         <form>
@@ -55,8 +55,8 @@
           <a class="btn btn-primary btn-block" href="login.html">Register</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="login.jsp">Login Page</a>
+          <a class="d-block small" href="forgot-password.jsp">Forgot Password?</a>
         </div>
       </div>
     </div>

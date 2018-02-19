@@ -2,7 +2,9 @@ package services;
 
 import javax.imageio.ImageIO;
 
+
 import exceptions.ServiceException;
+import recursos.Position;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -12,7 +14,7 @@ import java.io.IOException;
 
 public class WaterMark {
 
-    public static void addTextWatermark(String text, String type, File source, File destination) throws ServiceException {
+    public static void addTextWatermark(String text, String type, File source, File destination,Position position) throws ServiceException {
     	try{
 	        BufferedImage image = ImageIO.read(source);
 	
@@ -31,8 +33,9 @@ public class WaterMark {
 	        Rectangle2D rect = fontMetrics.getStringBounds(text, w);
 	
 	        // calculate center of the image
-	        int centerX = (image.getWidth() - (int) rect.getWidth()) / 2;
-	        int centerY = (int) (image.getHeight() / 1.8);
+	        
+	        int centerX = (int) (image.getWidth() / position.getX());
+	        int centerY = (int) (image.getHeight() / position.getY());
 	
 	        // add text overlay to the image
 	        w.drawString(text, centerX, centerY);
@@ -43,7 +46,7 @@ public class WaterMark {
     	}
     }
     
-    public static void addImageWatermark(File watermark, String type, File source, File destination) throws ServiceException {
+    public static void addImageWatermark(File watermark, String type, File source, File destination,Position position) throws ServiceException {
         
     	try{
 	    	BufferedImage image = ImageIO.read(source);
@@ -60,8 +63,8 @@ public class WaterMark {
 	        w.setComposite(alphaChannel);
 	
 	        // calculates the coordinate where the String is painted
-	        int centerX = (int) (image.getWidth() / 2.2);
-	        int centerY = (int) (image.getHeight() / 2.2);
+	        int centerX = (int) (image.getWidth() / position.getX());
+	        int centerY = (int) (image.getHeight() / position.getY());
 	
 	        // add text watermark to the image
 	        w.drawImage(overlay, centerX, centerY, null);

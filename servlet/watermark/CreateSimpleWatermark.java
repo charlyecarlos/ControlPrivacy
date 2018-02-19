@@ -1,22 +1,20 @@
-package servlet;
+package watermark;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.io.IOUtils;
 
 import classes.FormMultiPart;
 import exceptions.DomainException;
 import exceptions.ServiceException;
 import meta.FileMetadata;
+import recursos.Position;
 import services.WaterMark;
 
 /**
@@ -41,19 +39,17 @@ public class CreateSimpleWatermark extends HttpServlet {
         String salida=null;
 		int numfilesubidos=0; 
 		FormMultiPart  datos=null;
+		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"));
 		try{	
-			File file=new File(getServletContext().getRealPath(getServletContext().getInitParameter("dirUploadFiles")));
+			File file=new File(path);
 			if (!file.exists())
 				file.mkdirs();
 			
-			
 			// si queremmos coger la ruta final del parametro del fichero web.xml 
-			String  path = getServletContext().getRealPath(getServletContext().getInitParameter("dirUploadFiles"));
 			try {
 				datos= new FormMultiPart(path,request);
 			} catch (FileUploadException e) {
 				throw new ServiceException(e.getMessage(),e);
-	
 			} 
 				String watermark= datos.getFieldForm("textWatermark");
 				if(watermark.isEmpty())
@@ -72,44 +68,15 @@ public class CreateSimpleWatermark extends HttpServlet {
 //				System.out.println("Numero de fich subidos  "+numfilesubidos );
 //				System.out.println("Ruta del fichero subido "+ datos.getFieldFile("imageFile"));
 //				System.out.println("valor del fichero  "+ watermark);
-//				System.out.println("Ruta del fichero fichero  "+ folder);
+//				System.out.println("Ruta del fichero fichero  "+ folder);				
 				
 				FileMetadata fm=new FileMetadata(folder);
 				File image=new File(folder);
-				WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image);
-
+				WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.CENTERED);
 				
-//				// Convert image to array byte
-//				FileInputStream myStream = new FileInputStream(folder);
-//				byte[] imageData=IOUtils.toByteArray(myStream);
-//				
-//				// display image 
-//				response.setContentType("application/download");	//+fm.readExtensionFile());
-//				response.getOutputStream().write(imageData);
-
+				request.setAttribute("image", getServletContext().getInitParameter("dirWatermark")+"/"+image.getName());
 				
-				//	DOWNLOAD IMAGE
-//				File file=new File((String) request.getAttribute("image"));
-//			    response.setContentType("application/octet-stream");
-//			    response.setHeader("Content-Disposition",
-//			            "attachment;filename="+image.getName());
-//			    FileInputStream fileIn = new FileInputStream(image);
-//			    ServletOutputStream out = response.getOutputStream(); 
-//			    byte[] outputByte = new byte[(int)image.length()];
-//			    //copy binary contect to output stream
-//			    while(fileIn.read(outputByte, 0, (int)image.length()) != -1){
-//			    response.getOutputStream().write(outputByte, 0, (int) file.length());
-//			    out.write(outputByte, 0, (int)image.length());
-//			    }
-//			    fileIn.close();
-			
-
-
-				
-				request.setAttribute("image", file.getName()+"/"+image.getName());
-//				request.setAttribute("image", folder);
-				
-				salida="/successfullyCompleted.jsp";
+				salida="/successfullyCompleted_SimpleWatermark.jsp";
 				
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
