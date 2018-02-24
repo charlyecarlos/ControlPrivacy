@@ -7,7 +7,6 @@ import exceptions.ServiceException;
 import recursos.Position;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,8 +28,6 @@ public class WaterMark {
 	        w.setComposite(alphaChannel);
 	        w.setColor(Color.GRAY);
 	        w.setFont(new Font(Font.SANS_SERIF, Font.BOLD, image.getWidth()/6 ));
-	        FontMetrics fontMetrics = w.getFontMetrics();
-	        Rectangle2D rect = fontMetrics.getStringBounds(text, w);
 	
 	        // calculate center of the image
 	        

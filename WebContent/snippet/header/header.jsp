@@ -28,7 +28,7 @@
 							<li><a href="#">Separated link</a></li>
 					 	</ul>
 					</li> -->
-					<a href="./register/login.jsp" class="btn btn-default navbar-btn">Sign in</a>
+					<a href="./login.html" class="btn btn-default navbar-btn">Sign in</a>
 				 </ul>
 			  </div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->

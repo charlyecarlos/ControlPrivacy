@@ -2,16 +2,22 @@ package viewImage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import classes.FormMultiPart;
+import domain.Image;
+import domain.User;
 import exceptions.DomainException;
 import exceptions.ServiceException;
-import meta.FileMetadata;
+import services.ServiceImage;
+import util.Fecha;
 
 /**
  * Servlet implementation class ViewImage
@@ -35,7 +41,9 @@ public class ViewImage extends HttpServlet {
         String salida=null;
 		int numfilesubidos=0; 
 		FormMultiPart  datos=null;
-		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirViewImage"));
+		HttpSession session=request.getSession();
+		
+		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirViewImage"))+"/"+session.getId();
 		try{	
 			File file=new File(path);
 			if (!file.exists())
@@ -48,35 +56,40 @@ public class ViewImage extends HttpServlet {
 			} catch (Exception e) {
 				throw new ServiceException(e.getMessage(),e);
 			} 
-			String viewImage= datos.getFieldForm("viewImage");
+			int timeExpired=Integer.parseInt(datos.getFieldForm("viewImage"));
 			
 			String folder = datos.getFieldFile("imageFile");
 			if(folder.isEmpty())
 				throw new ServiceException("You have not selected any file");
+			String [] namefile=folder.split("\\\\");
 				
 //			System.out.println("Numero de fich subidos  "+numfilesubidos );
 //			System.out.println("Ruta del fichero subido "+ datos.getFieldFile("imageFile"));
 //			System.out.println("valor del fichero  "+ watermark);
 //			System.out.println("Ruta del fichero fichero  "+ folder);				
-				
-			FileMetadata fm=new FileMetadata(folder);
-			File image=new File(folder);
-				
-			request.setAttribute("image", getServletContext().getInitParameter("dirViewImage")+"/"+image.getName());
-				
-			salida="/image.jsp";
+//			System.out.println(namefile[namefile.length-1]);
+
+			String relativePath=getServletContext().getInitParameter("dirViewImage")+"/"+session.getId()+"/"+namefile[namefile.length-1];
+			String url_redirect=String.valueOf(UUID.randomUUID());
+			Image image=new Image(url_redirect,relativePath , new User("0","anonymous"), Fecha.fechaActual(), Fecha.sumarMesesFecha(Fecha.fechaActual(), timeExpired));
+			
+			ServiceImage sImage=new ServiceImage();
+			sImage.createImage(image);
+			
+			request.setAttribute("image", url_redirect);
+			salida="/successfullyCompleted_ViewImage.jsp";
 				
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				salida="/watermark-Picture.jsp";//Error Logic
+				salida="/viewImage.jsp";//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/errorInternal.jsp";	//Internal error		SIN TERMINAR
+				salida="/errorInternal.jsp";	//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/watermark-Picture.jsp";//Error Logic
+			salida="/viewImage.jsp";//Error Logic
 			
 		}
 

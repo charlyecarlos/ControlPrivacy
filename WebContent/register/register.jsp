@@ -8,12 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
-  <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  
+  <%@ include file="../snippet/login/login.jsp" %>
 
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
 </head>
@@ -25,16 +21,8 @@
       <div class="card-body">
         <form>
           <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">First name</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputLastName">Last name</label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
-              </div>
-            </div>
+           <label for="exampleInputName">Name</label>
+           <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter name">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -55,8 +43,8 @@
           <a class="btn btn-primary btn-block" href="login.html">Register</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.jsp">Login Page</a>
-          <a class="d-block small" href="forgot-password.jsp">Forgot Password?</a>
+          <a class="d-block small mt-3" href="login.html">Login Page</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
         </div>
       </div>
     </div>

@@ -1,20 +1,18 @@
 package services;
 
-import java.util.List;
-
 import daos.TransactionManager;
-import daos.MySQL.MySQL_TimeImageDAO;
-import domain.TimeImage;
+import daos.MySQL.MySQL_ImageDAO;
+import domain.Image;
 import exceptions.DAOException;
 import exceptions.ServiceException;
 
-public class ServiceTimeImage {
-	
-	public void insertTimeImage(TimeImage timeimage) throws ServiceException {
+public class ServiceImage {
+
+	public void createImage(Image image) throws ServiceException {
 		TransactionManager trans = new TransactionManager();
-		MySQL_TimeImageDAO daotimeimage=trans.getTimeImageDAO();
 		try{
-			daotimeimage.create(timeimage);
+			MySQL_ImageDAO daoimage=trans.getImageDAO();
+			daoimage.create(image);
 			trans.closeCommit();
 		} catch (DAOException e) {
 			trans.closeRollback();
@@ -25,28 +23,19 @@ public class ServiceTimeImage {
 		}
 	}
 	
-	public int updateTimeImage(TimeImage timeimage) throws ServiceException {
-		return 0;
-	}
-
-	public int deleteTimeImage(TimeImage timeimage) throws ServiceException {
-		return 0;
-	}
-
-	public List<TimeImage> recoverAllTimeImage() throws ServiceException {
+	public Image recoverImage(Image image) throws ServiceException {
 		TransactionManager trans = new TransactionManager();
-		MySQL_TimeImageDAO daotimeimage=trans.getTimeImageDAO();
-		List<TimeImage> timeimages=null;
 		try{
-			timeimages=daotimeimage.findAll();
+			MySQL_ImageDAO daoimage=trans.getImageDAO();
+			image=daoimage.recover(image);
 			trans.closeCommit();
-		} catch (DAOException e) {
+		}catch(DAOException e){
 			trans.closeRollback();
 			if (e.getCause() == null)
 				throw new ServiceException(e.getMessage()); //Logical error
 			else
 				throw new ServiceException(e.getMessage(), e); //Internal error
 		}
-		return timeimages;
+		return image;
 	}
 }

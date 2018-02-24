@@ -8,12 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Control Privacy - Login</title>
-  <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  
+  <%@ include file="../snippet/login/login.jsp" %>
 
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
 </head>
@@ -23,7 +19,12 @@
     <div class="shadow card card-login mx-auto mt-5">
       <h1 class="card-header login">Login</h1>
       <div class="card-body">
-        <form method="post" action="../Validation">
+        <form method="post" action="/ControlPrivacy/Validation">
+        	<%if(request.getAttribute("error")!=null){%> 		
+				<div class="alert alert-danger col-lg-12 text-center">
+					<p style="margin-bottom:0px;"><%=request.getAttribute("error")%></p>
+				</div>
+        	<%} %>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input class="form-control" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -41,8 +42,8 @@
           <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.jsp">Register an Account</a>
-          <a class="d-block small" href="forgot-password.jsp">Forgot Password?</a>
+          <a class="d-block small mt-3" href="register.html">Register an Account</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
         </div>
       </div>
     </div>

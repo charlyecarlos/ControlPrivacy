@@ -2,92 +2,104 @@ package domain;
 
 
 
+import java.sql.Date;
+
 import exceptions.DomainException;
 import util.Validator;
 
 public class User {
-	private static final String ERM_email = "Email no valido";
+	private static final String ERM_email = "invalid email";
 	private static final int email_MIN = 1;
-	private static final int email_MAX = 50;
+	private static final int email_MAX = 100;
 	
-	private static final String ERM_password = "contraseña no valida";
+	private static final String ERM_name = "invalid name";
+	private static final int name_MIN = 1;
+	private static final int name_MAX = 50;
+	
+	private static final String ERM_password = "invalid password";
 	private static final int password_MIN = 1;
 	private static final int password_MAX = 32;
 	
-	private static final String ERM_question = "la question no  es valida es muy larga ó es obligatoria ";
-	private static final int question_MIN = 1;
-	private static final int question_MAX = 50;
+	private static final String ERM_accessfail = "number of failed accesses maximum 3";
 	
-	private static final String ERM_answer = "recuerdo no valido";
-	private static final int answer_MIN = 1;
-	private static final int answer_MAX = 25;
-	
-	private static final String ERM_accessfail = "numero de accesos permitidos maximo 3";
-	
-	private static final String MSG_active = "active solo puede tomar valores S/N";
-	private static final String ERM_active = "active no valido";
+	private static final String MSG_active = "active can only be 'Y' or 'N'";
+	private static final String ERM_active = "invalid active";
 	private static final int active_MIN = 1;
 	private static final int active_MAX = 1;
 	
 	
-	private static final String MSG_locked = "Locked solo puede tomar valores S/N";;
-	private static final String ERM_locked = "Locked no valido";
+	private static final String MSG_locked = "Locked can only be 'Y' or 'N'";;
+	private static final String ERM_locked = "invalid locked";
 	private static final int locked_MIN = 1;
 	private static final int locked_MAX = 1;
 	
+	private String id_user;
+	private String email;
+	private String name;
+	private String pwd;
+	private TypeUser type;
+	private int access_fail=0;
+	private	Date date_creation;
+	private Date date_last_access;
+	private String locked="N";
+	private String active="N";
 	
-	private  String email;
-	private  String pwd;
-	private  TypeUser type;
-	private  String question;
-	private  String answer;
-	private  int accessfail=0;
-	private  String locked="N";
-	private  String active="S";
+// para crear un us con la PK
 	
-// para crear un us con la PK	
+public User (String id_user,String email){
+	this.id_user=id_user;
+	this.email=email;
+}
+	
 public  User(String email)  {
 	this.email=email;
-		
 	}
 // para crear un us
-public User(String password, TypeUser type,
-		        String email,String question,String answer) {
+public User(String id_user,String name,String password, TypeUser type,String email,Date date_creation,Date date_last_access) {
 	setPassword(password);
+	setName(name);
 	setType(type);
 	setEmail(email);
-	setQuestion(question);
-	setAnswer(answer);
-	
+	setDate_Creation(date_creation);
+	setDate_last_access(date_last_access);
 }
-
-	
-
-
-	
 	/**
  * @param pwd
  * @param type
  * @param email
- * @param question
- * @param answer
  * @param accessfail
+ * @param date_creation
+ * @param date_last_access
  * @param locked
  * @param active
  */
-public User(String us, String pwd, TypeUser type, String email,
-		String question, String answer, int accessfail,
-		String locked, String active) {
+public User(String id_user,String name, String pwd, TypeUser type, String email,int access_fail,Date date_creation,Date date_last_access,String locked, String active) {
+	this.id_user=id_user;
+	this.name=name;
 	this.pwd = pwd;
 	this.type = type;
 	this.email = email;
-	this.question = question;
-	this.answer = answer;
-	this.accessfail = accessfail;
+	this.access_fail = access_fail;
+	this.date_creation=date_creation;
+	this.date_last_access=date_last_access;
 	this.locked = locked;
 	this.active = active;
 }
 	public User() {}
+	
+	/**
+	 * @return id user
+	 */
+	public String getId_user(){
+		return id_user;
+	}
+	
+	/**
+	 * @param id user to set
+	 */
+	public void setId_user(String id_user){
+		this.id_user=id_user;
+	}
 	
 	/**
 	 * @return the password
@@ -104,23 +116,21 @@ public User(String us, String pwd, TypeUser type, String email,
 		} else {
 			throw new DomainException(ERM_password);
 		}
-		
 	}
+	
 	/**
 	 * @return the type
 	 */
 	public TypeUser getType() {
 		return type;
 	}
+	
 	/**
 	 * @param type the type to set
 	 */
 	public void setType(TypeUser type) {
 		this.type = type;
 	}
-	
-	
-		
 	
 	/**
 	 * @return the email
@@ -129,82 +139,94 @@ public User(String us, String pwd, TypeUser type, String email,
 		
 		return email;
 	}
+	
 	/**
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
-		//System.out.println(email);
 		if (Validator.email(email, email_MIN, email_MAX)) {
 			this.email = email.trim();
 		} else {
 			throw new DomainException(ERM_email);
-		}
-		
+		}	
 	}
+	
 	/**
-	 * @return the question
+	 * @return the name
 	 */
-	public String getQuestion() {
-		return question;
+	public String getName() {
+		return name;
 	}
+	
 	/**
-	 * @param question the question to set
+	 * @param email the name to set
 	 */
-	public void setQuestion(String question) {
-		if (Validator.length(question, question_MIN, question_MAX)) {
-			this.question = question;
-		} else {
-			throw new DomainException(ERM_question);
-		}
-		
+	public void setName(String name) {
+		if (Validator.length(name, name_MIN, name_MAX))
+			this.name = name.trim();
+		else
+			throw new DomainException(ERM_name);
 	}
+	
 	/**
-	 * @return the answer
+	 * @return Date_creation
 	 */
-	public String getAnswer() {
-		return answer;
+	public Date getDate_creation() {
+		return date_creation;
 	}
+	
 	/**
-	 * @param answer the answer to set
+	 * @param Date_creation
 	 */
-	public void setAnswer(String answer) {
-		if (Validator.length(answer, answer_MIN, answer_MAX)) {
-			this.answer = answer.trim();
-		} else {
-			throw new DomainException(ERM_answer);
-		}
-		
+	public void setDate_Creation(Date date_creation) {
+		this.date_creation=date_creation;
 	}
+	
+	/**
+	 * @return date_last_access
+	 */
+	public Date getDate_last_access() {
+		return date_last_access;
+	}
+	
+	/**
+	 * @param date_last_access to set
+	 */
+	public void setDate_last_access(Date date_last_access) {
+		this.date_last_access=date_last_access;
+	}
+	
 	/**
 	 * @return the accessfail
 	 */
-	public int getAccessfail() {
-		
-		return accessfail;
+	public int getAccess_fail() {
+		return access_fail;
 	}
+	
 	/**
 	 * @param accessfail the accessfail to set
 	 */
-	public void setAccessfail(int accessfail) {
-		if (accessfail >= 0 && accessfail<=3) {
-			this.accessfail = accessfail;
+	public void setAccessfail(int access_fail) {
+		if (access_fail >= 0 && access_fail<=3) {
+			this.access_fail = access_fail;
 		} else {
 			throw new DomainException(ERM_accessfail);
-		}
-		
+		}	
 	}
+	
 	/**
 	 * @return the locked
 	 */
 	public String getLocked() {
 		return locked;
 	}
+	
 	/**
 	 * @param locked the locked to set
 	 */
 	public void setLocked(String locked) {
 		if (Validator.length(locked, locked_MIN, locked_MAX)) {
-			if (locked.compareTo("S")==0||locked.compareTo("N")==0)
+			if (locked.compareTo("Y")==0||locked.compareTo("N")==0)
 				this.locked = locked;
 			else 
 				throw new DomainException(MSG_locked);
@@ -213,25 +235,26 @@ public User(String us, String pwd, TypeUser type, String email,
 		}
 		
 	}
+	
 	/**
 	 * @return the active
 	 */
 	public String getActive() {
 		return active;
 	}
+	
 	/**
 	 * @param active the active to set
 	 */
 	public void setActive(String active) {
 		if (Validator.length(active, active_MIN, active_MAX)) {
-			if (active.compareTo("S")==0||active.compareTo("N")==0)
+			if (active.compareTo("Y")==0||active.compareTo("N")==0)
 			    this.active = active.trim();
 			else 
 				throw new DomainException(MSG_active);
 		} else {
 			throw new DomainException(ERM_active);
-		}
-		
+		}	
 	}
 	
 }

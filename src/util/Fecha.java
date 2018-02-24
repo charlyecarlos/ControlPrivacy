@@ -93,10 +93,11 @@ public static Timestamp convertirATimestamp(String fecha, String mascara) throws
 		
 	// fecha y tiempo pero no milisegindos
 		public static java.sql.Date fechaActualDate()  {
-			 java.sql.Date CurrentDate = new java.sql.Date (Calendar.getInstance (). getTime (). getTime ());
+			 java.sql.Date CurrentDate = new java.sql.Date (Calendar.getInstance().getTime().getTime());
 			 return CurrentDate;
 				
 		}
+
 	
 	// fecha tiempo  y milisegundos.
 	public static java.sql.Timestamp fechaActual()  {
@@ -164,6 +165,32 @@ public static Timestamp convertirATimestamp(String fecha, String mascara) throws
 		return fechaResultado;
 		}else
 			 return null;
+	}
+
+	/**
+	 * Devuelve una fecha resultado de la suma de otra fecha mas 'minutos'
+	 * @param fechaOriginal 
+	 * @param minutos
+	 * @return fechaResultado
+	 */
+	public static java.sql.Date sumarMesesFecha(java.sql.Date fechaoriginal, int minutos) {
+		if(fechaoriginal!=null){
+		long msOriginal = fechaoriginal.getTime();
+		long msMinutos = TimeUnit.MILLISECONDS.convert(minutos, TimeUnit.MINUTES);
+		java.sql.Date fechaResultado = new java.sql.Date(msOriginal + msMinutos);
+		return fechaResultado;
+		}else
+		 return null;	
+	}
+	
+	public static java.sql.Timestamp sumarMesesFecha(java.sql.Timestamp fechaoriginal, int minutos) {
+		if(fechaoriginal!=null){
+		long msOriginal = fechaoriginal.getTime();
+		long msMinutos = TimeUnit.MILLISECONDS.convert(minutos, TimeUnit.MINUTES);
+		java.sql.Timestamp fechaResultado = new java.sql.Timestamp(msOriginal + msMinutos);
+		return fechaResultado;
+		}else
+		 return null;	
 	}
 	
 

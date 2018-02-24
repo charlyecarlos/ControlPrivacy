@@ -1,20 +1,40 @@
 package services;
 
-import java.util.List;
-
 import daos.TransactionManager;
-import daos.MySQL.MySQL_TimeImageDAO;
-import domain.TimeImage;
+import daos.MySQL.MySQL_UsersDAO;
+import domain.User;
 import exceptions.DAOException;
 import exceptions.ServiceException;
 
-public class ServiceTimeImage {
+public class ServiceUser {
+
 	
-	public void insertTimeImage(TimeImage timeimage) throws ServiceException {
+	public User recover(User user) throws ServiceException {
 		TransactionManager trans = new TransactionManager();
-		MySQL_TimeImageDAO daotimeimage=trans.getTimeImageDAO();
 		try{
-			daotimeimage.create(timeimage);
+			MySQL_UsersDAO daouser=trans.getUsersDAO();
+			user=daouser.recover(user);
+			trans.closeCommit();
+		}catch(DAOException e){
+			trans.closeRollback();
+			if (e.getCause() == null)
+				throw new ServiceException(e.getMessage()); //Logical error
+			else
+				throw new ServiceException(e.getMessage(), e); //Internal error
+		}
+		return user;
+	}
+	
+	public int incrementFail(User user) throws ServiceException{	
+		TransactionManager trans = new TransactionManager();
+		int rows=0;
+		try{
+			MySQL_UsersDAO daouser=trans.getUsersDAO();
+			user.setAccessfail(user.getAccess_fail()+1);
+			if (user.getAccess_fail()==3)
+				user.setLocked("S");
+			rows=daouser.update(user);
+			
 			trans.closeCommit();
 		} catch (DAOException e) {
 			trans.closeRollback();
@@ -23,30 +43,7 @@ public class ServiceTimeImage {
 			else
 				throw new ServiceException(e.getMessage(), e); //Internal error
 		}
+		return rows;
 	}
 	
-	public int updateTimeImage(TimeImage timeimage) throws ServiceException {
-		return 0;
-	}
-
-	public int deleteTimeImage(TimeImage timeimage) throws ServiceException {
-		return 0;
-	}
-
-	public List<TimeImage> recoverAllTimeImage() throws ServiceException {
-		TransactionManager trans = new TransactionManager();
-		MySQL_TimeImageDAO daotimeimage=trans.getTimeImageDAO();
-		List<TimeImage> timeimages=null;
-		try{
-			timeimages=daotimeimage.findAll();
-			trans.closeCommit();
-		} catch (DAOException e) {
-			trans.closeRollback();
-			if (e.getCause() == null)
-				throw new ServiceException(e.getMessage()); //Logical error
-			else
-				throw new ServiceException(e.getMessage(), e); //Internal error
-		}
-		return timeimages;
-	}
 }

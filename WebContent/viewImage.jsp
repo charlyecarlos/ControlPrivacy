@@ -17,7 +17,6 @@
 	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
 	<script type='text/javascript' src='js/inputFile.js'></script>
 	
-
 	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"> 
 	<!-- TITLE -->
 	<title>View Image</title>
@@ -32,7 +31,7 @@
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>View Image</h1>
 			<br>
-			<form method="post" action="viewImage" enctype="multipart/form-data">
+			<form method="post" action="ViewImage" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="input-group input-image" name="imageFile">
 			    		<input type="text" class="form-control" placeholder='Choose a file...' />

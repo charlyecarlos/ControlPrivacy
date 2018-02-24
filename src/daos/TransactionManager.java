@@ -8,7 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import daos.MySQL.MySQL_TimeImageDAO;
+import daos.MySQL.*;
 import exceptions.ServiceException;
 
 
@@ -87,11 +87,16 @@ public class TransactionManager {
 	public MySQL_TimeImageDAO getTimeImageDAO(){
 		return new MySQL_TimeImageDAO(con);
 	}
-	
+
+	public MySQL_ImageDAO getImageDAO(){
+		return new MySQL_ImageDAO(con);
+	}
+
+	public MySQL_UsersDAO getUsersDAO() {
+		return new MySQL_UsersDAO(con);
+	}
 	
 	public Connection getConexion() {
 		return con;
 	}
-	
-
 }
