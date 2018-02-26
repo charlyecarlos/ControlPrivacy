@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import services.ServiceTimeImage;
 import services.ServiceUser;
 import domain.User;
 import encrypt.EncryptMD5;
@@ -34,44 +33,45 @@ public class Validation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String output="";
 		ServiceUser suser=new ServiceUser();
+		HttpSession session=request.getSession(false);
+		if(session!=null)
+			session.invalidate();
+		session=request.getSession();
 		User user;
 		try {
-			user=new User(request.getParameter("username"));
-			user=suser.recover(user);
+			user=new User(request.getParameter("email"));
+			user=suser.recoverComplete(user);
 			if (user!=null)
 				if (user.getLocked().equals("S")){
 					request.setAttribute("user", user);
 					output="desbloquearCuenta.jsp";
 				}else
 					if (validateUser(user, suser, request)){
-						HttpSession sesion=request.getSession(false);
-						if(sesion!=null)
-							sesion.invalidate();
-						sesion=request.getSession();
-						sesion.setAttribute("user", user);
-						switch (user.getType().getDescription()) {
-							case "Administrator":output="admin.jsp";break;
-							case "user":output="user.jsp";break;
+						session=request.getSession();
+						session.setAttribute("user", user);
+						switch (user.getType().getDescription()){
+							case "Administrator":output="admin.html";break;
+							case "User":output="user.html";break;
 						}
 					}else
 						throw new DomainException("The password is wrong.");
-			else{
-				request.setAttribute("error", "The email does not exist.");
-				output="/login.html";
-			}
+			else if(request.getParameter("email").isEmpty())
+				throw new ServiceException("Email cannot be empty.");
+			else
+				throw new ServiceException("The email does not exist.");
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
-				request.setAttribute("error",e.getMessage());
-				output="/login.html";
+				session.setAttribute("error",e.getMessage());
+				output="login.html";
 			}else{
 				e.printStackTrace();
-				output="/errorinterno.jsp";
+				output="errorInternal.jsp";
 			}
-	}catch (DomainException e) {
-		request.setAttribute("error",e.getMessage());
-		output="/login.html";
-	}
-	request.getRequestDispatcher(output).forward(request, response);
+		}catch (DomainException e) {
+			session.setAttribute("error",e.getMessage());
+			output="login.html";
+		}
+		response.sendRedirect(response.encodeRedirectURL(output));
 	}
 	
 	private boolean validateUser(User user,ServiceUser suser,HttpServletRequest request) throws ServiceException {

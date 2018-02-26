@@ -96,6 +96,14 @@ public class TransactionManager {
 		return new MySQL_UsersDAO(con);
 	}
 	
+	public MySQL_Type_UserDAO getType_User(){
+		return new MySQL_Type_UserDAO(con);
+	}
+	
+	public MySQL_CounterDAO getCounterDAO(){
+		return new MySQL_CounterDAO(con);
+	}
+	
 	public Connection getConexion() {
 		return con;
 	}

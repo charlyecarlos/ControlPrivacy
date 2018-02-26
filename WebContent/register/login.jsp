@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <title>Control Privacy - Login</title>
   
-  <%@ include file="../snippet/login/login.jsp" %>
+  <%@ include file="../snippet/login/bootstrap.jsp" %>
 
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
 </head>
@@ -20,11 +20,15 @@
       <h1 class="card-header login">Login</h1>
       <div class="card-body">
         <form method="post" action="/ControlPrivacy/Validation">
-        	<%if(request.getAttribute("error")!=null){%> 		
+        	<%if(session.getAttribute("error")!=null){%> 		
 				<div class="alert alert-danger col-lg-12 text-center">
-					<p style="margin-bottom:0px;"><%=request.getAttribute("error")%></p>
+					<p style="margin-bottom:0px;"><%=session.getAttribute("error")%></p>
 				</div>
-        	<%} %>
+        	<% session.removeAttribute("error");
+        	}else if(request.getParameter("session")!=null){
+        		session.invalidate();
+        		session=request.getSession();
+        	}%>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input class="form-control" name="email" type="email" aria-describedby="emailHelp" placeholder="Enter email">

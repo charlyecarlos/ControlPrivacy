@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   
-  <%@ include file="../snippet/login/login.jsp" %>
+  <%@ include file="../snippet/login/bootstrap.jsp" %>
 
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
 </head>
@@ -19,28 +19,33 @@
     <div class="shadow card card-register mx-auto mt-5">
       <h1 class="card-header login text-center">Register an Account</h1>
       <div class="card-body">
-        <form>
+        <form method="post" action="/ControlPrivacy/Register">
+        	<%if(request.getAttribute("error")!=null){%> 		
+				<div class="alert alert-danger col-lg-12 text-center">
+					<p style="margin-bottom:0px;"><%=request.getAttribute("error")%></p>
+				</div>
+        	<%} %>
           <div class="form-group">
            <label for="exampleInputName">Name</label>
-           <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter name">
+           <input class="form-control" name="name" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter name">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input class="form-control" name="email" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+                <input class="form-control" name="password" id="exampleInputPassword1" type="password" placeholder="Password">
               </div>
               <div class="col-md-6">
                 <label for="exampleConfirmPassword">Confirm password</label>
-                <input class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirm password">
+                <input class="form-control" name="repeatPassword" id="exampleConfirmPassword" type="password" placeholder="Confirm password">
               </div>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="login.html">Register</a>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="login.html">Login Page</a>

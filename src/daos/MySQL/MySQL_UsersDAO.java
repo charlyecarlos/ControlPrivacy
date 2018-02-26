@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import daos.interfaces.UsersDAO;
-import domain.TypeUser;
+import domain.Type_User;
 import domain.User;
 import exceptions.DAOException;
 import recursos.DbQuery;
@@ -46,9 +47,9 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(3, user.getEmail());
 			stat.setString(4, user.getPassword());
 			stat.setInt(5, user.getType().getType());
-			stat.setInt(6, user.getAccess_fail());
-			stat.setDate(7, user.getDate_creation());
-			stat.setDate(8, user.getDate_last_access());
+			stat.setString(6,String.valueOf(user.getAccess_fail()));
+			stat.setLong(7, user.getDate_creation().getTime());
+			stat.setLong(8, user.getDate_last_access().getTime());
 			stat.setString(9, user.getLocked());
 			stat.setString(10, user.getActive());
 			stat.executeUpdate();
@@ -86,23 +87,20 @@ public class MySQL_UsersDAO implements UsersDAO{
 			Recursos.closeResultSet(rs);
 			Recursos.closePreparedStatement(stat);
 			
-			
-			stat=con.prepareStatement(DbQuery.getCreateuser());
-			stat.setString(1, user.getId_user());
-			stat.setString(2, user.getName());
-			stat.setString(3, user.getEmail());
-			stat.setString(4, user.getPassword());
-			stat.setInt(5, user.getType().getType());
-			stat.setInt(6, user.getAccess_fail());
-			stat.setDate(7, user.getDate_creation());
-			stat.setDate(8, user.getDate_last_access());
-			stat.setString(9, user.getLocked());
-			stat.setString(10, user.getActive());
+			stat=con.prepareStatement(DbQuery.getUpdateUser());
+			stat.setString(1, user.getName());
+			stat.setString(2, user.getEmail());
+			stat.setString(3, user.getPassword());
+			stat.setInt(4, user.getType().getType());
+			stat.setInt(5, user.getAccess_fail());
+			stat.setLong(6, user.getDate_creation().getTime());
+			stat.setLong(7, user.getDate_last_access().getTime());
+			stat.setString(8, user.getLocked());
+			stat.setString(9, user.getActive());
+			stat.setString(10, user.getId_user());
 			num=stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode()== ORACLE_DUPLICATE_PK)
-				throw new DAOException("the email already exists.");
-			else if(e.getErrorCode() == ORACLE_FAIL_FK)
+			if(e.getErrorCode() == ORACLE_FAIL_FK)
 				throw new DAOException("Operation out of service, try again later.");
 			else
 				throw new DAOException(DB_ERR,e);
@@ -121,19 +119,18 @@ public class MySQL_UsersDAO implements UsersDAO{
 			st.setString(1,user.getEmail());
 			rs=st.executeQuery();
 			user=null;
-			if (rs.next()){
-			user=new User(rs.getString(1),
-						  rs.getString(2),
-						  rs.getString(3),
-						  new TypeUser(rs.getInt(4)),
-						  rs.getString(5),
-						  rs.getInt(6),
-						  rs.getDate(7),
-						  rs.getDate(8),
-						  rs.getString(9),
-						  rs.getString(10)
-						 );
-			}
+			if (rs.next())
+				user=new User(rs.getString(1),
+							  rs.getString(2),
+							  rs.getString(3),
+							  rs.getString(4),
+							  new Type_User(rs.getInt(5)),
+							  rs.getInt(6),
+							  new Timestamp(rs.getLong(7)),
+							  new Timestamp(rs.getLong(8)),
+							  rs.getString(9),
+							  rs.getString(10)
+							);
 		} catch (SQLException e) {
 			throw new DAOException(DB_ERR, e);
 		} finally {
@@ -142,7 +139,7 @@ public class MySQL_UsersDAO implements UsersDAO{
 		}
 		return user;
 	}
-
+	
 	@Override
 	public int delete(String id_user) throws DAOException {
 		PreparedStatement st = null;

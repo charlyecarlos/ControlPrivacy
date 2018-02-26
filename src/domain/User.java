@@ -1,8 +1,6 @@
 package domain;
 
-
-
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import exceptions.DomainException;
 import util.Validator;
@@ -37,10 +35,10 @@ public class User {
 	private String email;
 	private String name;
 	private String pwd;
-	private TypeUser type;
+	private Type_User type;
 	private int access_fail=0;
-	private	Date date_creation;
-	private Date date_last_access;
+	private	Timestamp date_creation;
+	private Timestamp date_last_access;
 	private String locked="N";
 	private String active="N";
 	
@@ -55,13 +53,16 @@ public  User(String email)  {
 	this.email=email;
 	}
 // para crear un us
-public User(String id_user,String name,String password, TypeUser type,String email,Date date_creation,Date date_last_access) {
+public User(String name,String email,String password, Type_User type,Timestamp date_creation,Timestamp date_last_access) {
 	setPassword(password);
 	setName(name);
 	setType(type);
 	setEmail(email);
 	setDate_Creation(date_creation);
 	setDate_last_access(date_last_access);
+	setAccessfail(0);
+	setLocked("N");
+	setActive("Y");
 }
 	/**
  * @param pwd
@@ -73,7 +74,7 @@ public User(String id_user,String name,String password, TypeUser type,String ema
  * @param locked
  * @param active
  */
-public User(String id_user,String name, String pwd, TypeUser type, String email,int access_fail,Date date_creation,Date date_last_access,String locked, String active) {
+public User(String id_user, String email,String name, String pwd, Type_User type,int access_fail,Timestamp date_creation,Timestamp date_last_access,String locked, String active) {
 	this.id_user=id_user;
 	this.name=name;
 	this.pwd = pwd;
@@ -121,14 +122,14 @@ public User(String id_user,String name, String pwd, TypeUser type, String email,
 	/**
 	 * @return the type
 	 */
-	public TypeUser getType() {
+	public Type_User getType() {
 		return type;
 	}
 	
 	/**
 	 * @param type the type to set
 	 */
-	public void setType(TypeUser type) {
+	public void setType(Type_User type) {
 		this.type = type;
 	}
 	
@@ -169,30 +170,30 @@ public User(String id_user,String name, String pwd, TypeUser type, String email,
 	}
 	
 	/**
-	 * @return Date_creation
+	 * @return Timestamp_creation
 	 */
-	public Date getDate_creation() {
+	public Timestamp getDate_creation() {
 		return date_creation;
 	}
 	
 	/**
-	 * @param Date_creation
+	 * @param Timestamp_creation
 	 */
-	public void setDate_Creation(Date date_creation) {
+	public void setDate_Creation(Timestamp date_creation) {
 		this.date_creation=date_creation;
 	}
 	
 	/**
 	 * @return date_last_access
 	 */
-	public Date getDate_last_access() {
+	public Timestamp getDate_last_access() {
 		return date_last_access;
 	}
 	
 	/**
 	 * @param date_last_access to set
 	 */
-	public void setDate_last_access(Date date_last_access) {
+	public void setDate_last_access(Timestamp date_last_access) {
 		this.date_last_access=date_last_access;
 	}
 	

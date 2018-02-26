@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <title>Forgot-password</title>
   
-  <%@ include file="../snippet/login/login.jsp" %>
+  <%@ include file="../snippet/login/bootstrap.jsp" %>
   
   <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet"> 
 </head>

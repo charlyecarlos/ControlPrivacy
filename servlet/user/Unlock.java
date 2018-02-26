@@ -7,11 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.User;
-import exceptions.DomainException;
-import exceptions.ServiceException;
-import services.ServiceTimeImage;
-
 /**
  * Servlet implementation class Desbloquear
  */

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import daos.interfaces.ImageDAO;
@@ -22,9 +23,8 @@ public class MySQL_ImageDAO implements ImageDAO{
 	private static final String DB_ERR = "Database error";
 	
 	public static final int ORACLE_DUPLICATE_PK = 1;
-	private static final int ORACLE_DELETE_FK = 2292;
+//	private static final int ORACLE_DELETE_FK = 2292;
 	private static final int ORACLE_FAIL_FK = 2291;
-	private static final int MYSQL_DUPLICATE_UNIQUE=1062;
 
 	
 	private Connection con;
@@ -59,8 +59,6 @@ public class MySQL_ImageDAO implements ImageDAO{
 				throw new DAOException("The image already exists.");
 			else if(e.getErrorCode() == ORACLE_FAIL_FK)
 				throw new DAOException("Operation out of service, try again later.");
-			else if(e.getErrorCode()== MYSQL_DUPLICATE_UNIQUE)
-				throw new DAOException("The image has already been loaded.");
 			else
 				throw new DAOException(DB_ERR,e);
 		}finally{
@@ -98,6 +96,34 @@ public class MySQL_ImageDAO implements ImageDAO{
 			Recursos.closePreparedStatement(stat);	
 		}
 		return image;
+	}
+	
+
+	@Override
+	public List<Image> recoverForUser(User user) throws DAOException {
+		PreparedStatement stat=null;
+		ResultSet rs=null;
+		List<Image> images=new ArrayList<Image>();
+		try {
+			stat = con.prepareStatement(DbQuery.getRecoverimageforuser());
+			stat.setString(1,user.getId_user());
+			rs=stat.executeQuery();
+			while (rs.next()){
+			images.add(new Image(rs.getString(1),
+							  rs.getString(2),
+							  new User(rs.getString(3)),
+							  new Timestamp(rs.getLong(4)),
+							  new Timestamp(rs.getLong(5)),
+							  rs.getInt(6)
+							 ));
+			}
+		} catch (SQLException e) {
+			throw new DAOException(DB_ERR, e);
+		} finally {
+			Recursos.closeResultSet(rs);
+			Recursos.closePreparedStatement(stat);	
+		}
+		return images;
 	}
 
 	@Override

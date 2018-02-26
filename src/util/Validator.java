@@ -51,21 +51,10 @@ public class Validator {
 		decimal=new Double(numero).toString();
 		decimal=decimal.substring(decimal.indexOf(".")+1);
 	
-		if(decimal.length()<=escala){
-	
-		return true;
-		}
-		else{
-			
+		if(decimal.length()<=escala)
+			return true;
+		else
 			return false;
-		}
-			
-		
-		
-		
-		
-		
-
 	}
 
 	/*

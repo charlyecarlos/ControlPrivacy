@@ -9,39 +9,38 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  
   <servlet>
-  	<servlet-name>login.html</servlet-name>
+    <servlet-name>login.html</servlet-name>
     <jsp-file>/register/login.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>login.html</servlet-name>
     <url-pattern>/login.html</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>register.html</servlet-name>
+    <servlet-name>register.html</servlet-name>
     <jsp-file>/register/register.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>register.html</servlet-name>
     <url-pattern>/register.html</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>forgot-password.html</servlet-name>
+    <servlet-name>forgot-password.html</servlet-name>
     <jsp-file>/register/forgot-password.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>forgot-password.html</servlet-name>
     <url-pattern>/forgot-password.html</url-pattern>
   </servlet-mapping>
-  
-  
-  
-  
-  
+  <servlet>
+    <servlet-name>user.html</servlet-name>
+    <jsp-file>/register/user.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user.html</servlet-name>
+    <url-pattern>/user.html</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Validation</servlet-name>
     <servlet-class>user.Validation</servlet-class>

@@ -19,14 +19,14 @@ public class Image {
 
 	private static final String ERM_visits = "invalid visits";
 	private static final int visits_DECIMAL = 10;
-	private static final int visits_ESCALE = 0;
+	private static final int visits_ESCALE = 1;
 	
-	String url_redirect;
-	String url_image;
-	User owner;
-	Timestamp date_creation;
-	Timestamp expiration_date;
-	int visits;
+	private String url_redirect;
+	private String url_image;
+	private User owner;
+	private Timestamp date_creation;
+	private Timestamp expiration_date;
+	private int visits;
 	
 	public Image(String url_redirect){
 		this.url_redirect=url_redirect;
