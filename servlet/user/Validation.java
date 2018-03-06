@@ -42,7 +42,7 @@ public class Validation extends HttpServlet {
 			user=new User(request.getParameter("email"));
 			user=suser.recoverComplete(user);
 			if (user!=null)
-				if (user.getLocked().equals("S")){
+				if (user.getLocked().equals("Y")){
 					request.setAttribute("user", user);
 					output="desbloquearCuenta.jsp";
 				}else
@@ -76,9 +76,11 @@ public class Validation extends HttpServlet {
 	
 	private boolean validateUser(User user,ServiceUser suser,HttpServletRequest request) throws ServiceException {
 		String password=EncryptMD5.encryptMD5(request.getParameter("password"));
-		if(password.equals(user.getPassword()))
+		if(password.equals(user.getPassword())){
+			user.setAccessfail(0);
+			suser.update(user);
 			return true;
-		else{
+		}else{
 			suser.incrementFail(user);
 			return false;
 		}

@@ -5,7 +5,7 @@
 	<meta name='author' content='Carlos Campos' />
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	<meta name='copyright' content='Carlos Campos' />
-	<meta name='description' content='Paginas web de principiantes' />
+	<meta name='description' content='' />
 
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 
@@ -21,7 +21,7 @@
 
 	<!-- MENU -->
 	<%@ include file="snippet/header/header.jsp" %>
-	<!-- FIN MENU -->
+	<!-- END MENU -->
 
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">

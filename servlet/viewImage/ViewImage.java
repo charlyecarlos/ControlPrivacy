@@ -13,10 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import classes.FormMultiPart;
 import domain.Image;
+import domain.Statistic_file;
 import domain.User;
 import exceptions.DomainException;
 import exceptions.ServiceException;
+import meta.FileMetadata;
 import services.ServiceImage;
+import services.ServiceStatistic_file;
 import util.Fecha;
 
 /**
@@ -39,7 +42,7 @@ public class ViewImage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String salida=null;
-		int numfilesubidos=0; 
+		int numfilesubidos=0;
 		FormMultiPart  datos=null;
 		HttpSession session=request.getSession();
 		
@@ -75,6 +78,11 @@ public class ViewImage extends HttpServlet {
 			
 			ServiceImage sImage=new ServiceImage();
 			sImage.createImage(image);
+			
+			FileMetadata fm=new FileMetadata(folder);
+			Statistic_file statistic_file=new Statistic_file("ViewImage", fm.readExtensionFile(), Fecha.fechaActual());
+			ServiceStatistic_file sStatistic=new ServiceStatistic_file();
+			sStatistic.create(statistic_file);
 			
 			request.setAttribute("image", url_redirect);
 			salida="/successfullyCompleted_ViewImage.jsp";

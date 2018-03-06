@@ -104,6 +104,10 @@ public class TransactionManager {
 		return new MySQL_CounterDAO(con);
 	}
 	
+	public MySQL_Statistic_fileDAO getStatistic_fileDAO(){
+		return new MySQL_Statistic_fileDAO(con);
+	}
+	
 	public Connection getConexion() {
 		return con;
 	}

@@ -1,5 +1,8 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import daos.TransactionManager;
 import daos.MySQL.MySQL_Type_UserDAO;
 import daos.MySQL.MySQL_UsersDAO;
@@ -71,6 +74,40 @@ public class ServiceUser {
 		return user;
 	}
 	
+	public int update(User user) throws ServiceException {
+		TransactionManager trans = new TransactionManager();
+		int rows=0;
+		try{
+			MySQL_UsersDAO daouser=trans.getUsersDAO();
+			rows=daouser.update(user);
+			trans.closeCommit();
+		}catch(DAOException e){
+			trans.closeRollback();
+			if (e.getCause() == null)
+				throw new ServiceException(e.getMessage()); //Logical error
+			else
+				throw new ServiceException(e.getMessage(), e); //Internal error
+		}
+		return rows;
+	}
+	
+	public List<User> findAllOrderByDateCreation() throws ServiceException {
+		TransactionManager trans = new TransactionManager();
+		List<User> users=new ArrayList<User>();
+		try{
+			MySQL_UsersDAO daouser=trans.getUsersDAO();
+			users=daouser.findAllOrderByDateCreation();
+			trans.closeCommit();
+		}catch(DAOException e){
+			trans.closeRollback();
+			if (e.getCause() == null)
+				throw new ServiceException(e.getMessage()); //Logical error
+			else
+				throw new ServiceException(e.getMessage(), e); //Internal error
+		}
+		return users;
+	}
+	
 	public int incrementFail(User user) throws ServiceException{	
 		TransactionManager trans = new TransactionManager();
 		int rows=0;
@@ -78,7 +115,7 @@ public class ServiceUser {
 			MySQL_UsersDAO daouser=trans.getUsersDAO();
 			user.setAccessfail(user.getAccess_fail()+1);
 			if (user.getAccess_fail()==3)
-				user.setLocked("S");
+				user.setLocked("Y");
 			rows=daouser.update(user);
 			
 			trans.closeCommit();

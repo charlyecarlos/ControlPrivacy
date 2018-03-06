@@ -10,6 +10,38 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+    <servlet-name>index.html</servlet-name>
+    <jsp-file>/index.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>index.html</servlet-name>
+    <url-pattern>/index.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>cleanMeta.html</servlet-name>
+    <jsp-file>/cleanMeta.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cleanMeta.html</servlet-name>
+    <url-pattern>/cleanMeta.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>viewImage.html</servlet-name>
+    <jsp-file>/viewImage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>viewImage.html</servlet-name>
+    <url-pattern>/viewImage.html</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>watermarkPicture.html</servlet-name>
+    <jsp-file>/watermarkPicture.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>watermarkPicture.html</servlet-name>
+    <url-pattern>/watermarkPicture.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>login.html</servlet-name>
     <jsp-file>/register/login.jsp</jsp-file>
   </servlet>
@@ -49,6 +81,14 @@
     <servlet-name>Validation</servlet-name>
     <url-pattern>/Validation</url-pattern>
   </servlet-mapping>
+  <context-param>
+    <param-name>mail</param-name>
+    <param-value>a@gmail.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>passwordMail</param-name>
+    <param-value>a</param-value>
+  </context-param>
   <context-param>
     <param-name>dirWatermark</param-name>
     <param-value>dir/watermark</param-value>

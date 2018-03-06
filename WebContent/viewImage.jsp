@@ -10,14 +10,14 @@
 	<meta name='author' content='Carlos Campos' />
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	<meta name='copyright' content='Carlos Campos' />
-	<meta name='description' content='Paginas web de principiantes' />
+	<meta name='description' content='' />
 
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 
-	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
+	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'></link>
 	<script type='text/javascript' src='js/inputFile.js'></script>
 	
-	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"></link>
 	<!-- TITLE -->
 	<title>View Image</title>
 </head>
@@ -30,7 +30,7 @@
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>View Image</h1>
-			<br>
+			<br></br>
 			<form method="post" action="ViewImage" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="input-group input-image" name="imageFile">
@@ -39,7 +39,7 @@
 			        		<button class="btn btn-default btn-choose" type="button">Choose</button>
 			    		</span>
 					</div>
-					<br>
+					<br></br>
 					<select name="viewImage" class="form-control">
 						<%
 						ServiceTimeImage stimeimage=new ServiceTimeImage();

@@ -14,6 +14,7 @@ public class DbQuery {
 	private static final String UpdateUser="UPDATE USERS SET EMAIL=?,NAME=?,PWD=?,TYPE=?,ACCESS_FAIL=?,DATE_CREATION=?,DATE_LAST_ACCESS=?,LOCKED=?,ACTIVE=? WHERE ID_USER=?";
 	private static final String RecoverUser="SELECT ID_USER,NAME,EMAIL,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE FROM USERS WHERE EMAIL=?";
 	private static final String DeleteUser="DELETE FROM USERS WHERE ID_USER=?";
+	private static final String FindAllOrderByDateCreation="SELECT ID_USER,NAME,EMAIL,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE FROM USERS ORDER BY DATE_CREATION";
 	
 	// IMAGES
 	
@@ -25,6 +26,12 @@ public class DbQuery {
 	
 	private static final String RecoverCounters="SELECT ID_COUNTER,TABLE_COUNT,COUNT FROM COUNTERS WHERE ID_COUNTER=?";
 	private static final String UpdateCounters="UPDATE COUNTERS SET TABLE_COUNT=?,COUNT=? WHERE ID_COUNTER=?";
+	
+	// STATISTIC_FILE
+	
+	private static final String CreateStatistic_file="INSERT INTO statistics_file(ID_FILE, MODULE, TYPE_FILE, DATE_ANALYSE) VALUES (?,?,?,?)";
+	
+	private static final String RecoverType_file="SELECT TYPE_FILE,COUNT(*) FROM statistics_file GROUP BY TYPE_FILE";
 	
 	// SET AND GET
 	
@@ -39,8 +46,8 @@ public class DbQuery {
 	public static String getCreateuser() {
 		return CreateUser;
 	}
-	
-	public static String getUpdateUser(){
+
+	public static String getUpdateuser() {
 		return UpdateUser;
 	}
 
@@ -50,6 +57,10 @@ public class DbQuery {
 
 	public static String getDeleteuser() {
 		return DeleteUser;
+	}
+
+	public static String getFindallorderbydatecreation() {
+		return FindAllOrderByDateCreation;
 	}
 
 	public static String getCreateimage() {
@@ -70,6 +81,14 @@ public class DbQuery {
 
 	public static String getUpdatecounters() {
 		return UpdateCounters;
+	}
+
+	public static String getCreatestatisticFile() {
+		return CreateStatistic_file;
+	}
+
+	public static String getRecovertypeFile() {
+		return RecoverType_file;
 	}
 	
 }

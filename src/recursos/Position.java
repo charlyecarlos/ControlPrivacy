@@ -4,8 +4,8 @@ public enum Position {
 	CENTERED("CENTERED",5,1.8),
 	UPPER_RIGHT("UPPER RIGHT",2.6,6.3),
 	UPPER_LEFT("UPPER LEFT",90,6.3),
-	DOWN_RIGHT("DOWN RIGHT",2.6,1.01),
-	DOWN_LEFT("DOWN LEFT",90,1.01);
+	DELOW_RIGHT("DELOW RIGHT",2.6,1.01),
+	DELOW_LEFT("DELOW LEFT",90,1.01);
 	
 	private String description;
 	private double x;
