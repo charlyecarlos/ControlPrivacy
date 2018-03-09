@@ -9,11 +9,11 @@
 
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 
-	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
+	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'></link>
 	<script type='text/javascript' src='js/inputFile.js'></script>
 	
 
-	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"></link>
 	<!-- TITLE -->
 	<title>Clean Meta</title>
 </head>
@@ -26,20 +26,19 @@
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>Analyse Metadata</h1>
-			<br>
-			<form method="post" action="#" enctype="multipart/form-data">
+			<br></br>
+			<form method="post" action="CleanMeta" enctype="multipart/form-data">
 				<ul class="nav nav-tabs">
 					<li class="active"><a data-toggle="tab" href="#home">Upload File</a></li>
 					<li><a data-toggle="tab" href="#url">URL</a></li>
-					<li><a data-toggle="tab" href="#search">Search</a></li>
 				</ul>
-				<br><br>
+				<br></br>
 				<div class="tab-content col-lg-12">
 					<div id="home" class="tab-pane fade in active">
 						<!-- COMPONENT START -->
 						<div class="form-group">
-							<div class="input-group input-file">
-								<input type="text" name="localFile" class="form-control" placeholder='Choose a file...' />			
+							<div class="input-group input-file" name="localFile">
+								<input type="text" class="form-control" placeholder='Choose a file...' />			
 								<span class="input-group-btn">
 									<button class="btn btn-default btn-choose" type="button">Choose</button>
 								</span>
@@ -54,17 +53,7 @@
 					<div id="url" class="tab-pane fade">
 						<div class="col-lg-12">
 							<div class="input-group">
-								<input type="url" class="form-control" placeholder="Search for...">
-								<span class="input-group-btn">
-									<button class="btn btn-primary" type="submit">Analyse</button>
-								  </span>
-							</div>
-						</div>
-					</div>
-					<div id="search" class="tab-pane fade">
-						<div class="col-lg-12">
-							<div class="input-group">
-								<input type="url" class="form-control" placeholder="Search for...">
+								<input type="url" name="externalFile" class="form-control" placeholder="Search for..."></input>
 								<span class="input-group-btn">
 									<button class="btn btn-primary" type="submit">Analyse</button>
 								  </span>

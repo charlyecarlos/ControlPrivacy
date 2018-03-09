@@ -19,7 +19,6 @@
       <link href="register/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
       
       <script type="text/javascript" src="js/user.js"></script>
-      <script type='text/javascript' src='js/inputFile.js'></script>
    </head>
    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
       <%
@@ -38,37 +37,10 @@
                </li>
                <li class="breadcrumb-item active">My Dashboard</li>
             </ol>
-            <!-- Area Chart Example-->
-            <div class="card mb-3 text-center">
-               <div class="card-header">
-                  <span class="glyphicon glyphicon-level-up"></span>Add watermark with multiple files
-               </div>
-               <div class="card-body col-lg-10 mx-auto" style="padding: 1rem;">
-                  <form method="post" action="CreateSimpleWatermark" enctype="multipart/form-data">
-                     <div class="form-group">
-                        <div class="input-group input-image" name="imageFile">
-                           <input type="text" class="form-control" placeholder='Choose a file...' />
-                           <span class="input-group-btn">
-                           <button class="btn btn-default btn-choose" type="button">Choose</button>
-                           </span>
-                        </div>
-                        <div class="text-left" style="margin: 10px;">
-                        	<input type="radio" name="tab" value="hidden" onclick="hiddenText();" checked/> Logo
-							<input type="radio" name="tab" value="show" onclick="showText();" /> Text
-                        </div>
-                        <div id="hide" class="hide" style="display: none;">
-	                        <input type="text" name="textWatermark" class="form-control" placeholder='Name of the watermark...' />    
-                        </div>
-                     </div>
-                     <!-- COMPONENT END -->
-                     <div class="form-group" style="margin-bottom: 0;">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                        <button type="reset" class="btn btn-danger">Reset</button>
-                     </div>
-                  </form>
-               </div>
-               <div class="card-footer small text-muted"> You must add a logo to be able to put it to the watermark </div>
-            </div>
+            
+            <!-- watermark-multiple -->
+            <%@ include file="../snippet/userComponent/watermarkMultiple.jsp" %>
+            
             <!-- Example DataTables Card-->
             <div class="card mb-3">
                <div class="card-header">
@@ -92,7 +64,7 @@
                               images=simage.recoverImageForUser(user);
                               for(Image image:images){%>
                            <tr>
-                              <td><%=image.getUrl_redirect()%></td>
+                              <td>http://localhost:8080/ControlPrivacy/image.html?img=<%=image.getUrl_redirect()%></td>
                               <td><%=image.getDate_creation()%></td>
                               <td><%=image.getExpiration_date()%></td>
                               <td><%=image.getVisits()%></td>

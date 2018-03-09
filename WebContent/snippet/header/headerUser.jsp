@@ -25,17 +25,17 @@
             <span class="nav-link-text">Tables</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configuration">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <span class="nav-link-text">Configuration</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="navbar.html">Administrator of logos</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="cards.html">Settings</a>
             </li>
           </ul>
         </li>

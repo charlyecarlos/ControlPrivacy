@@ -58,8 +58,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(4, user.getPassword());
 			stat.setInt(5, user.getType().getType());
 			stat.setString(6,String.valueOf(user.getAccess_fail()));
-			stat.setLong(7, user.getDate_creation().getTime());
-			stat.setLong(8, user.getDate_last_access().getTime());
+			stat.setTimestamp(7, user.getDate_creation());
+			stat.setTimestamp(8, user.getDate_last_access());
 			stat.setString(9, user.getLocked());
 			stat.setString(10, user.getActive());
 			stat.executeUpdate();
@@ -95,8 +95,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(3, user.getPassword());
 			stat.setInt(4, user.getType().getType());
 			stat.setString(5, String.valueOf(user.getAccess_fail()));
-			stat.setLong(6, user.getDate_creation().getTime());
-			stat.setLong(7, user.getDate_last_access().getTime());
+			stat.setTimestamp(6, user.getDate_creation());
+			stat.setTimestamp(7, user.getDate_last_access());
 			stat.setString(8, user.getLocked());
 			stat.setString(9, user.getActive());
 			stat.setString(10, user.getId_user());
@@ -140,8 +140,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(3, user.getPassword());
 			stat.setInt(4, user.getType().getType());
 			stat.setString(5, String.valueOf(user.getAccess_fail()));
-			stat.setLong(6, user.getDate_creation().getTime());
-			stat.setLong(7, user.getDate_last_access().getTime());
+			stat.setTimestamp(6, user.getDate_creation());
+			stat.setTimestamp(7, user.getDate_last_access());
 			stat.setString(8, user.getLocked());
 			stat.setString(9, user.getActive());
 			stat.setString(10, user.getId_user());
@@ -173,8 +173,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 							  rs.getString(4),
 							  new Type_User(rs.getInt(5)),
 							  rs.getInt(6),
-							  new Timestamp(rs.getLong(7)),
-							  new Timestamp(rs.getLong(8)),
+							  rs.getTimestamp(7),
+							  rs.getTimestamp(8),
 							  rs.getString(9),
 							  rs.getString(10)
 							);
@@ -226,8 +226,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 							  rs.getString(4),
 							  new Type_User(rs.getInt(5)),
 							  rs.getInt(6),
-							  new Timestamp(rs.getLong(7)),
-							  new Timestamp(rs.getLong(8)),
+							  rs.getTimestamp(7),
+							  rs.getTimestamp(8),
 							  rs.getString(9),
 							  rs.getString(10)
 							));

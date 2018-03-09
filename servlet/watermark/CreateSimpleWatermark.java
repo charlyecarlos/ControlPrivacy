@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileUploadException;
 
 import classes.FormMultiPart;
+import domain.Statistic_file;
 import exceptions.DomainException;
 import exceptions.ServiceException;
 import meta.FileMetadata;
 import recursos.Position;
+import services.ServiceStatistic_file;
 import services.WaterMark;
+import util.Fecha;
 
 /**
  * Servlet implementation class CreateWatermark
@@ -67,15 +70,18 @@ public class CreateSimpleWatermark extends HttpServlet {
 				
 //				System.out.println("Numero de fich subidos  "+numfilesubidos );
 //				System.out.println("Ruta del fichero subido "+ datos.getFieldFile("imageFile"));
-//				System.out.println("valor del fichero  "+ watermark);
 //				System.out.println("Ruta del fichero fichero  "+ folder);				
 				
 				FileMetadata fm=new FileMetadata(folder);
 				File image=new File(folder);
 				WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.CENTERED);
 				
-				request.setAttribute("image", getServletContext().getInitParameter("dirWatermark")+"/"+image.getName());
 				
+				Statistic_file statistic_file=new Statistic_file("Watermark", fm.readExtensionFile(), Fecha.fechaActual());
+				ServiceStatistic_file sStatistic=new ServiceStatistic_file();
+				sStatistic.create(statistic_file);
+				
+				request.setAttribute("image", getServletContext().getInitParameter("dirWatermark")+"/"+image.getName());
 				salida="/successfullyCompleted_SimpleWatermark.jsp";
 				
 		} catch (ServiceException e) {
@@ -84,7 +90,7 @@ public class CreateSimpleWatermark extends HttpServlet {
 				salida="/watermark-Picture.jsp";//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/ErorInterno.jsp?mensaje=Internal error";	//Internal error		SIN TERMINAR
+				salida="/errorInternal.jsp?mensaje=Internal error";	//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());

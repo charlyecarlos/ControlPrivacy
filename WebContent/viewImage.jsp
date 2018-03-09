@@ -5,7 +5,7 @@
 <%@page import="services.ServiceTimeImage"%>
 <%@page import="java.util.List" %>
 <%@page errorPage="internalError.jsp"%>
-<html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>
 <head>
 	<meta name='author' content='Carlos Campos' />
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />

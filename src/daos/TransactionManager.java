@@ -108,6 +108,10 @@ public class TransactionManager {
 		return new MySQL_Statistic_fileDAO(con);
 	}
 	
+	public MySQL_Statistics_indexDAO getStatistics_indexDAO(){
+		return new MySQL_Statistics_indexDAO(con);
+	}
+	
 	public Connection getConexion() {
 		return con;
 	}

@@ -34,7 +34,7 @@
 			<h1>Successfully Completed</h1>
 			<br>
 			<p> This is the link to view the image:</p>
-			<input class="form-control" id="urlImage" type="text" value="http://localhost:8080/ControlPrivacy/image.jsp?img=<%=request.getAttribute("image")%>" readonly/>
+			<input class="form-control" id="urlImage" type="text" value="http://localhost:8080/ControlPrivacy/image.html?img=<%=request.getAttribute("image")%>" readonly/>
 		</div>
 	</div>
 	<!-- FOOTER -->

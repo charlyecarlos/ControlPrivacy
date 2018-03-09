@@ -34,6 +34,14 @@
     <url-pattern>/viewImage.html</url-pattern>
   </servlet-mapping>
     <servlet>
+    <servlet-name>image.html</servlet-name>
+    <jsp-file>/image.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>image.html</servlet-name>
+    <url-pattern>/image.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>watermarkPicture.html</servlet-name>
     <jsp-file>/watermarkPicture.jsp</jsp-file>
   </servlet>

@@ -33,7 +33,7 @@ public class MySQL_Statistic_fileDAO implements Statistic_fileDAO{
 			stat.setString(1, statistic_file.getId_file());
 			stat.setString(2, statistic_file.getModule());
 			stat.setString(3, statistic_file.getType_file());
-			stat.setLong(4, statistic_file.getDate_analyse().getTime());
+			stat.setTimestamp(4, statistic_file.getDate_analyse());
 			stat.executeUpdate();
 		} catch (SQLException e) {
 			if(e.getErrorCode()== ORACLE_DUPLICATE_PK)

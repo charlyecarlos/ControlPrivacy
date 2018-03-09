@@ -68,7 +68,6 @@ public class ViewImage extends HttpServlet {
 				
 //			System.out.println("Numero de fich subidos  "+numfilesubidos );
 //			System.out.println("Ruta del fichero subido "+ datos.getFieldFile("imageFile"));
-//			System.out.println("valor del fichero  "+ watermark);
 //			System.out.println("Ruta del fichero fichero  "+ folder);				
 //			System.out.println(namefile[namefile.length-1]);
 
@@ -90,14 +89,14 @@ public class ViewImage extends HttpServlet {
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				salida="/viewImage.jsp";//Error Logic
+				salida="/viewImage.jsp";	//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/errorInternal.jsp";	//Internal error
+				salida="/errorInternal.jsp";//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/viewImage.jsp";//Error Logic
+			salida="/viewImage.jsp";		//Error Logic
 			
 		}
 

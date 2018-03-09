@@ -32,15 +32,14 @@ public class Fecha {
 		if (fecha == null||fecha.trim().length()==0 )
 			return null;
 		else{
-		SimpleDateFormat formato = new SimpleDateFormat(mascara);
-		formato.setLenient(false);
-		long milis;
-		
-			milis = formato.parse(fecha).getTime();
-		
-		return new java.sql.Date(milis);
+			SimpleDateFormat formato = new SimpleDateFormat(mascara);
+			formato.setLenient(false);
+			long milis;
+			milis = formato.parse(fecha).getTime();	
+			return new java.sql.Date(milis);
 		}	
 	}
+	
 	/**
 	 * 
 	 * Convierte un String de fecha con una mascara ,a Timestamp (fecha con milisegundos)
@@ -48,8 +47,8 @@ public class Fecha {
 	 * @param mascara
 	 * @return TimeStamp 
 	 */
-public static Timestamp convertirATimestamp(String fecha, String mascara) throws ParseException  {
-		
+	
+	public static Timestamp convertirATimestamp(String fecha, String mascara) throws ParseException  {	
 		if (fecha ==null||fecha.compareTo("")==0 )
 			return null;
 		else {
@@ -57,10 +56,10 @@ public static Timestamp convertirATimestamp(String fecha, String mascara) throws
 			formato.setLenient(false);
 			long milis;
 			milis = formato.parse(fecha).getTime();
-			
 			return new Timestamp(milis);
 		}
 	}
+
 /**
  * convierte un  java.sql.date a un String con una mascara
  * @param fecha  java.sql.Date
@@ -69,7 +68,6 @@ public static Timestamp convertirATimestamp(String fecha, String mascara) throws
  *               
  * @return 
  */
-	
 	public static String convertirAString(java.sql.Date fecha,String mascara) {
 		if (fecha==null )
 			return null;
@@ -79,32 +77,29 @@ public static Timestamp convertirATimestamp(String fecha, String mascara) throws
 	        return formato.format(fecha);
 	    }
 	}
+	
 	public static String convertirAString(java.sql.Timestamp  fecha,String mascara) {
-			if (fecha==null )
-				return null;
-		    else{
-		        SimpleDateFormat formato = new SimpleDateFormat(mascara);
-		        formato.setLenient(false);
-		        return formato.format(fecha);
-		}
-			
-			
+		if (fecha==null )
+			return null;
+		else{
+			SimpleDateFormat formato = new SimpleDateFormat(mascara);
+			formato.setLenient(false);
+			return formato.format(fecha);
+		}	
 	}
 		
 	// fecha y tiempo pero no milisegindos
-		public static java.sql.Date fechaActualDate()  {
-			 java.sql.Date CurrentDate = new java.sql.Date (Calendar.getInstance().getTime().getTime());
-			 return CurrentDate;
-				
-		}
+	public static java.sql.Date fechaActualDate()  {
+		java.sql.Date CurrentDate = new java.sql.Date (Calendar.getInstance().getTime().getTime());
+		return CurrentDate;
+	}
 
-	
 	// fecha tiempo  y milisegundos.
 	public static java.sql.Timestamp fechaActual()  {
 		 Timestamp CurrentTimestamp = new java.sql.Timestamp (Calendar.getInstance (). getTime (). getTime ());
 		return CurrentTimestamp;
-			
 	}
+	
 	/**
 	 * 
 	 * @param fecha1 
@@ -193,5 +188,28 @@ public static Timestamp convertirATimestamp(String fecha, String mascara) throws
 		 return null;	
 	}
 	
+	
+	/**
+	 * Name of the month being January 1 and December 12
+	 * @throws ServiceException 
+	 * @return nameOfMonth
+	 */
+	public static String nameOfMonth(int num_month) throws ServiceException{
+		switch(num_month){
+			case 1:return "January";
+			case 2:return "February";
+			case 3:return "March";
+			case 4:return "April";
+			case 5:return "May";
+			case 6:return "June";
+			case 7:return "July";
+			case 8:return "August";
+			case 9:return "September";
+			case 10:return "October";
+			case 11:return "November";
+			case 12:return "December";
+			default:throw new ServiceException("The num of month is incorrect");
+		}
+	}
 
 }// fin de la clase

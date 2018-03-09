@@ -8,7 +8,7 @@
 	<meta name='author' content='Carlos Campos' />
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	<meta name='copyright' content='Carlos Campos' />
-	<meta name='description' content='Paginas web de principiantes' />
+	<meta name='description' content='' />
 
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 
@@ -43,7 +43,7 @@
 						<h1>The image has expired or does not exist.</h1>
 			<%		}
 				}else
-					response.sendRedirect("http://localhost:8080/ControlPrivacy/viewImage.jsp");
+					response.sendRedirect("http://localhost:8080/ControlPrivacy/viewImage.html");
 			%>
 					
 		</div>

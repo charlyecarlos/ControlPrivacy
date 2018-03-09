@@ -1,8 +1,12 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<%@page import="domain.Canvas_files"%>
+<%@page import="services.ServiceStatistic_file"%>
+<%@page import="util.Fecha"%>
+<%@page import="domain.Statistics_index"%>
+<%@page import="services.ServiceStatistics_index"%>
 <%@page import="domain.User"%>
 <%@page import="java.util.List"%>
-<%@page import="services.ServiceUser"%>
 <%@page errorPage="internalError.jsp"%> 
 
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>
@@ -14,11 +18,11 @@
 	
 	<%@ include file="snippet/util/bootstrap.jsp"%>
 	
-	<link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css">
+	<link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css"></link>
 	<!-- Custom styles for this template -->
-	<link href="css/index.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet"></link>
 	
-	<link href="https://fonts.googleapis.com/css?family=Niconne|Special+Elite|Lobster" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Niconne|Special+Elite|Lobster" rel="stylesheet"></link>
 
 	<!--titulo-->
 	<title>Control Privacy</title>
@@ -28,8 +32,7 @@
 	<%@ include file="snippet/header/header.jsp"%>
 	<!-- END MENU -->
 
-	<header class="row">
-	<div class="col-md-12">
+	<header>
 		<div id="carousel-example-generic" class="carousel slide"
 			data-ride="carousel">
 			<!-- Indicators -->
@@ -74,7 +77,6 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-	</div>
 	</header>
 
 	<section class="gradient-white">
@@ -88,11 +90,54 @@
 						new Chart(document.getElementById("myPieChart"), {
 						    type: 'pie',
 						    data: {
-						      labels: ["JPG", "PNG", "GIF", "PDF", "Word"],
+						      labels: [
+								<%
+								ServiceStatistics_index  sStatistics_index=new ServiceStatistics_index();
+								List<Canvas_files> statistics_files=sStatistics_index.readTypeFiles();
+								
+								boolean first=true;
+								boolean exit=false;
+								int i=0;
+					        	for(;i<statistics_files.size()&&!exit;i++){
+					        		if(i!=6){
+						        		if(first)
+						        			first=false;
+						        		else{%> 
+						        			,
+						        		<%}
+						        		%>
+						        		<%='"'+statistics_files.get(i).getType_file()+'"'%>
+					        	<%	}else
+						        		exit=true;
+					        	}
+					        	if(i>=6){%>
+					        		,"Other"
+					        	<%}%>
+						    	],
 						      datasets: [{
 						        label: "Type",
 						        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-						        data: [10,10,2,3,1]
+						        data: [
+						        <%
+						        i=0;
+								int sum=0;
+								first=true;
+						        for(Canvas_files cf:statistics_files){
+							        if(i!=6){
+							        	if(first)
+							        		first=false;
+							        	else{%> 
+							        		,
+							        	<%}
+							        	i++;%>
+							        	<%=cf.getCont()%>
+							        <%}else
+					        			sum+=cf.getCont();
+					        	}
+						        if(i==6){%>
+						        	<%=","+sum%>
+						        <%}%>
+						        ]
 						      }]
 						    },
 						    options: {
@@ -104,7 +149,7 @@
 						});
 					</script>
 	            </div>
-	            <br>
+	            <br></br>
 	            <div class="card-footer small text-center text-muted">Updated Today</div>
 	        </div>
 	        <div class="card col-lg-6">
@@ -113,31 +158,86 @@
 	            	<script src="register/vendor/chart.js/Chart.js"></script>
 					<script>
 						<%
-						ServiceUser sUser=new ServiceUser();
-						List<User> users=sUser.findAllOrderByDateCreation();
+						List<Statistics_index> statistics=sStatistics_index.readStatisticsUser();
 						
 						%>
 						new Chart(document.getElementById("line-chart"), {
 						  type: 'line',
 						  data: {
-						    labels: ['February','March','April'],
+						    labels: [
+						    	<%first=true;
+					        	for(Statistics_index si:statistics){
+					        		if(first)
+					        			first=false;
+					        		else{%> 
+					        			,
+					        		<%}%>
+					        		<%='"'+Fecha.nameOfMonth(si.getMonth())+" "+si.getYear()+'"'%>
+					        	<%}%>
+				        	],
 						    datasets: [{
-						        data: [2,2,2],
+						        data: [
+						        	<%first=true;
+						        	sum=0;
+						        	for(Statistics_index si:statistics){
+						        		if(first)
+						        			first=false;
+						        		else{%> 
+						        			,
+						        		<%}%>
+						        		<%=sum+=si.getCont()%>
+						        	<%}%>
+						        ],
 						        label: "Users",
 						        borderColor: "#3e95cd",
 						        fill: false
 						      }, {
-						        data: [10,15,30],
+						        data: [
+						        <%statistics=sStatistics_index.readStatistics("ViewImage");
+						        first=true;
+					        	sum=0;
+					        	for(Statistics_index si:statistics){
+					        		if(first)
+					        			first=false;
+					        		else{%> 
+					        			,
+					        		<%}%>
+					        		<%=sum+=si.getCont()%>
+					        	<%}%>],
 						        label: "Images upload",
 						        borderColor: "#8e5ea2",
 						        fill: false
 						      }, {
-							    data: [10,19,38],
+							    data: [
+							    <%statistics=sStatistics_index.readStatistics("Watermark");
+								first=true;
+						       	sum=0;
+						     	for(Statistics_index si:statistics){
+						        	if(first)
+						        		first=false;
+						        	else{%> 
+						        		,
+						        	<%}%>
+						        	<%=sum+=si.getCont()%>
+						        <%}%>
+						        ],
 							    label: "Watermark",
 							    borderColor: "#FFFF33",
 							    fill: false
 							  }, {
-								data: [7,10,13],
+								data: [
+								<%statistics=sStatistics_index.readStatistics("FileAnalyse");
+								first=true;
+								sum=0;
+								for(Statistics_index si:statistics){
+									if(first)
+								    	first=false;
+								   	else{%> 
+							    		,
+							    	<%}%>
+					        	<%=sum+=si.getCont()%>
+						        <%}%>
+						        ],
 								label: "File Analyse",
 								borderColor: "#FF99FF",
 								fill: false
@@ -153,7 +253,7 @@
 						});
 					</script>
 	            </div>
-	            <br>
+	            <br></br>
             	<div class="card-footer small text-center text-muted">Updated Today</div>
         	</div>
         </article>
@@ -168,8 +268,7 @@
 		<div class="footer-left">
 			<h3>Company<span>logo</span></h3>
 			<p class="footer-links">
-				<a href="#">Home</a> · <a href="#">Blog</a> · <a href="#">Pricing</a>
-				· <a href="#">About</a> · <a href="#">Faq</a> · <a href="#">Contact</a>
+				<a href="#">Home</a> · <a href="#">About us</a> · <a href="#">Faq</a> · <a href="#">Contact</a>
 			</p>
 			<p class="footer-company-name">Control Privacy &copy; 2018</p>
 		</div>
@@ -187,7 +286,7 @@
 			<div>
 				<i class="fa fa-envelope"></i>
 				<p>
-					<a href="mailto:carloscampos@controlprivacy.net">carloscampos@controlprivacy.net</a>
+					<a href="mailto:support@controlprivacy.net">support@controlprivacy.net</a>
 				</p>
 			</div>
 		</div>

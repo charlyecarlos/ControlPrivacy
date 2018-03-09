@@ -35,7 +35,8 @@ public class FileMetadata {
 		return date;
 	}
 	
-	
-	
+	public void setLastModified(Long newLastModified){
+		file.setLastModified(newLastModified);
+	}
 	
 }

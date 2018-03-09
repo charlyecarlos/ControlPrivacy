@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,8 +49,8 @@ public class MySQL_ImageDAO implements ImageDAO{
 			stat.setString(1, image.getUrl_redirect());
 			stat.setString(2, image.getUrl_image());
 			stat.setString(3, image.getOwner().getId_user());
-			stat.setLong(4, image.getDate_creation().getTime());
-			stat.setLong(5, image.getExpiration_date().getTime());
+			stat.setTimestamp(4, image.getDate_creation());
+			stat.setTimestamp(5, image.getExpiration_date());
 			stat.setInt(6, image.getVisits());
 			stat.executeUpdate();
 		} catch (SQLException e) {
@@ -84,8 +83,8 @@ public class MySQL_ImageDAO implements ImageDAO{
 			image=new Image(rs.getString(1),
 						  rs.getString(2),
 						  new User(rs.getString(3)),
-						  new Timestamp(rs.getLong(4)),
-						  new Timestamp(rs.getLong(5)),
+						  rs.getTimestamp(4),
+						  rs.getTimestamp(5),
 						  rs.getInt(6)
 						 );
 			}
@@ -112,8 +111,8 @@ public class MySQL_ImageDAO implements ImageDAO{
 			images.add(new Image(rs.getString(1),
 							  rs.getString(2),
 							  new User(rs.getString(3)),
-							  new Timestamp(rs.getLong(4)),
-							  new Timestamp(rs.getLong(5)),
+							  rs.getTimestamp(4),
+							  rs.getTimestamp(5),
 							  rs.getInt(6)
 							 ));
 			}
