@@ -8,8 +8,7 @@
 		<span class="glyphicon glyphicon-level-up"></span>Add watermark with multiple files
 	</div>
 	<div class="card-body col-lg-10 mx-auto" style="padding: 1rem;">
-		<form method="post" action="CreateSimpleWatermark"
-			enctype="multipart/form-data">
+		<form method="post" action="CreateSimpleWatermark" enctype="multipart/form-data">
 			<div class="form-group">
 				<!-- COMPONENT START -->
 				<div class="form-group">

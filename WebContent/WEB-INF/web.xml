@@ -9,6 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>index.html</servlet-name>
     <jsp-file>/index.jsp</jsp-file>
@@ -17,6 +18,7 @@
     <servlet-name>index.html</servlet-name>
     <url-pattern>/index.html</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>cleanMeta.html</servlet-name>
     <jsp-file>/cleanMeta.jsp</jsp-file>
@@ -33,7 +35,7 @@
     <servlet-name>viewImage.html</servlet-name>
     <url-pattern>/viewImage.html</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>image.html</servlet-name>
     <jsp-file>/image.jsp</jsp-file>
   </servlet>
@@ -81,6 +83,7 @@
     <servlet-name>user.html</servlet-name>
     <url-pattern>/user.html</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>Validation</servlet-name>
     <servlet-class>user.Validation</servlet-class>
@@ -89,6 +92,34 @@
     <servlet-name>Validation</servlet-name>
     <url-pattern>/Validation</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>CleanMeta</servlet-name>
+    <servlet-class>metadata.CleanMeta</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CleanMeta</servlet-name>
+    <url-pattern>/CleanMeta</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ViewImage</servlet-name>
+    <servlet-class>viewimage.ViewImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewImage</servlet-name>
+    <url-pattern>/ViewImage</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CreateSimpleWatermark</servlet-name>
+    <servlet-class>watermark.CreateSimpleWatermark</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateSimpleWatermark</servlet-name>
+    <url-pattern>/CreateSimpleWatermark</url-pattern>
+  </servlet-mapping>
+  
   <context-param>
     <param-name>mail</param-name>
     <param-value>a@gmail.com</param-value>

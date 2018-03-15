@@ -5,11 +5,13 @@ public class Metadata {
 	private String name;
 	private String data;
 	private boolean sensitive;
+	private boolean remove;
 	
-	public Metadata(String name, String data, boolean sensitive) {
+	public Metadata(String name, String data, boolean sensitive,boolean remove) {
 		this.name = name;
 		this.data = data;
 		this.sensitive = sensitive;
+		this.remove=remove;
 	}
 
 	public String getName() {
@@ -35,6 +37,13 @@ public class Metadata {
 	public void setSensitive(boolean sensitive) {
 		this.sensitive = sensitive;
 	}
-	
+
+	public boolean canRemove() {
+		return remove;
+	}
+
+	public void setRemove(boolean remove) {
+		this.remove = remove;
+	}
 	
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<%@page import="domain.Metadata"%>
+<%@page import="java.util.List"%>
 <%@page import="services.ServiceImage" %>
 <%@page import="domain.Image" %>
 <%@page import="util.Fecha" %>
@@ -12,10 +14,11 @@
 
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 
-	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
-	
-	<link rel="stylesheet" type="text/css" href="css/viewImage.css">
+	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'></link>
+	<link rel="stylesheet" type="text/css" href="css/table.css"></link>
 
+	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"></link>
+	
 	<!--titulo-->
 	<title>Image</title>
 </head>
@@ -25,31 +28,37 @@
 	<!-- END MENU -->
 	
 	<div class="container">
-		<div class="col-lg-2">
+		<div class="col-lg-12">
+			<%List<Metadata> metadata=(List<Metadata>) request.getAttribute("Metadata");
+			if(metadata!=null){%>
+				<h1>File metadata</h1>
+				<br></br>
+				<table class="table table-hover col-lg-12 text-left">
+					<tbody>
+				 	<%	boolean pair=false;
+				 		for(Metadata meta:metadata){
+				 			if(!pair){%>
+				 			<tr>
+				 			<%}%>
+								<td class="col-lg-2"><b><%= meta.getName() %>:</b></td>
+								<td class="col-lg-4"><span class="<%=meta.canRemove()?"glyphicon glyphicon-ok text-success":"glyphicon glyphicon-remove text-danger"%>"></span> <i style="color:<%= meta.isSensitive()?"red":"black" %>"> <%= meta.getData() %></i></td>
+							<%if(pair){%>
+				 			</tr>
+				 			<%pair=false;
+				 			}else
+				 				pair=true;%>
+					<%	}%>
+					</tbody>
+				</table>
+				<div class="text-right"><span class="glyphicon glyphicon-ok text-success"></span> = Can remove. &nbsp<span class="glyphicon glyphicon-remove text-danger"></span> = Can´t remove. &nbsp<i style='color:red'>Data sensitive.</i></div>
+				<br>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Delete</button>
+				</div>
+			<%}else
+				response.sendRedirect("http://localhost:8080/ControlPrivacy/cleanMeta.html");%>					
 		</div>
-		<div class="col-lg-8">
-			<%	String img=(String) request.getParameter("img");	// NO TERMINADO
-			 	if(img!=null){
-					ServiceImage simage=new ServiceImage();
-					Image image= simage.recoverImage(new Image(img));
-					boolean expiration=false;
-					if(image.getExpiration_date().getTime()<Fecha.fechaActual().getTime())
-						expiration=true;
-					if(image.getUrl_image()!=null && !expiration){%>
-						<a href="<%=image.getUrl_image()%>" title="click here to see the full sized image">
-							<img src="<%=image.getUrl_image()%>" alt="" />
-						</a>
-			<%		}else{%>
-						<h1>The image has expired or does not exist.</h1>
-			<%		}
-				}else
-					response.sendRedirect("http://localhost:8080/ControlPrivacy/cleanMeta.html");
-			%>
-					
-		</div>
-		<div class="col-lg-2">
-		</div>
-	</div>
+	</div> 
 	
 	<!-- FOOTER -->
 	<%@ include file="snippet/footer/footer.jsp" %>

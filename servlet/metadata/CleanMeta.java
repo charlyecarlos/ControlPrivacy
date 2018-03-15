@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +23,6 @@ import util.Fecha;
 /**
  * Servlet implementation class Metadata
  */
-@WebServlet("/CleanMeta")
 public class CleanMeta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,7 +59,6 @@ public class CleanMeta extends HttpServlet {
 			}
 			
 			String folder = datos.getFieldFile("localFile");
-			System.out.println(folder);
 			if(folder.isEmpty())
 				throw new ServiceException("You have not selected any file");
 			String [] namefile=folder.split("\\\\");
@@ -78,11 +75,11 @@ public class CleanMeta extends HttpServlet {
 			List<Metadata> metadata=new ArrayList<Metadata>();
 			
 			//	Generic Metadata
-			metadata.add(new Metadata("Extension", fm.readExtensionFile(), false));
-			metadata.add(new Metadata("Last Modified", fm.readLastModified().toString(), true));
+			metadata.add(new Metadata("Extension", fm.readExtensionFile(), false,false));
+			metadata.add(new Metadata("Last Modified", fm.readLastModified().toString(), true,true));
 			
 			
-			Statistic_file statistic_file=new Statistic_file("ViewImage", fm.readExtensionFile(), Fecha.fechaActual());
+			Statistic_file statistic_file=new Statistic_file("FileAnalyse", fm.readExtensionFile(), Fecha.fechaActual());
 			ServiceStatistic_file sStatistic=new ServiceStatistic_file();
 			sStatistic.create(statistic_file);
 
@@ -100,7 +97,6 @@ public class CleanMeta extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			salida="/cleanMeta.jsp";		//Error Logic
 		}
-		System.out.println(salida);
 		getServletContext().getRequestDispatcher(salida).forward(request, response);	
 	}
 

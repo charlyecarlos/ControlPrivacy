@@ -48,7 +48,7 @@ public class Register extends HttpServlet {
 					Mail mail=new Mail(getServletContext().getInitParameter("mail"), getServletContext().getInitParameter("passwordMail"), user.getEmail(),"Confirm account", mail());
 					mail.sendMail();
 				}else
-					throw new ServiceException("The passwords do not match .");
+					throw new ServiceException("The passwords do not match.");
 			else
 				throw new ServiceException("The password cannot be empty.");
 			
@@ -69,7 +69,7 @@ public class Register extends HttpServlet {
 	}
 	
 	private String mail() {
-		String mail="<html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'><head><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'><script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script><script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script><title>Activation</title></head><body style='text-align: center; background-color: lightcyan;'><h1>WELCOME TO 'CONTROL PRIVACY'</h1><h5>Press this button to activate your account.</h5><a href='activate' class='btn btn-success' role='button'>activate</a></body></html>";
+		String mail="<html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'><head><title>Activation</title></head><body style='text-align: center;'><h1>WELCOME TO 'CONTROL PRIVACY'</h1><h5>Press this button to activate your account.</h5><style>.btn {background: #3498db;background-image: -webkit-linear-gradient(top, #3498db, #2980b9);background-image: -moz-linear-gradient(top, #3498db, #2980b9);background-image: -ms-linear-gradient(top, #3498db, #2980b9);background-image: -o-linear-gradient(top, #3498db, #2980b9);background-image: linear-gradient(to bottom, #3498db, #2980b9);-webkit-border-radius: 28;-moz-border-radius: 28;border-radius: 28px;text-shadow: 1px 1px 3px #141214;font-family: Arial;color: #ffffff;font-size: 20px;padding: 10px 20px 10px 20px;text-decoration: none;}.btn:hover {background: #3cb0fd;background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);background-image: -o-linear-gradient(top, #3cb0fd, #3498db);background-image: linear-gradient(to bottom, #3cb0fd, #3498db);text-decoration: none;}</style><a href='activate' class='btn' role='button'>activate</a></body></html>";
 		return mail;
 	}
 

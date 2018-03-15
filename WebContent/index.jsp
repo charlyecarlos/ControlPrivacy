@@ -99,7 +99,7 @@
 								boolean exit=false;
 								int i=0;
 					        	for(;i<statistics_files.size()&&!exit;i++){
-					        		if(i!=6){
+					        		if(i!=5){
 						        		if(first)
 						        			first=false;
 						        		else{%> 
@@ -123,7 +123,7 @@
 								int sum=0;
 								first=true;
 						        for(Canvas_files cf:statistics_files){
-							        if(i!=6){
+							        if(i!=5){
 							        	if(first)
 							        		first=false;
 							        	else{%> 
@@ -134,7 +134,7 @@
 							        <%}else
 					        			sum+=cf.getCont();
 					        	}
-						        if(i==6){%>
+						        if(i==5){%>
 						        	<%=","+sum%>
 						        <%}%>
 						        ]
