@@ -1,13 +1,14 @@
 package daos.interfaces;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 
 import exceptions.DAOException;
 
 public interface GenericDAO <T,ID extends Serializable> {
 	
-	void create(T entity) throws DAOException;
+	void create(T entity) throws DAOException, SQLException;
 	
 	int update(T entity) throws DAOException;
 	

@@ -16,10 +16,9 @@
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 	<!-- END BOOTSTRAP -->
 
-	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
-	<script type='text/javascript' src='js/copyImage.js'></script>
+	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'></link>
 
-	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"></link>
 	
 	<!-- TITLE -->
 	<title>Clean Meta</title>
@@ -35,6 +34,7 @@
 			<br>
 			<p> This is the link to view the image:</p>
 			<input class="form-control" id="urlImage" type="text" value="http://localhost:8080/ControlPrivacy/image.html?img=<%=request.getAttribute("image")%>" readonly/>
+			<script type='text/javascript' src='js/copyImage.js'></script>
 		</div>
 	</div>
 	<!-- FOOTER -->

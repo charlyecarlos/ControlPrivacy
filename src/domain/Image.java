@@ -28,6 +28,14 @@ public class Image {
 	private Timestamp expiration_date;
 	private int visits;
 	
+	public Image(){}
+	
+	public static Image createImageWithUrl(String url_image){
+		Image image=new Image();
+		image.setUrl_image(url_image);
+		return image;
+	}
+	
 	public Image(String url_redirect){
 		this.url_redirect=url_redirect;
 	}

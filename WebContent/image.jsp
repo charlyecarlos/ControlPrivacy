@@ -39,7 +39,9 @@
 						<a href="<%=image.getUrl_image()%>" title="click here to see the full sized image">
 							<img src="<%=image.getUrl_image()%>" alt="" />
 						</a>
-			<%		}else{%>
+			<%			image.setVisits(image.getVisits()+1);
+						simage.updateImage(image);
+					}else{%>
 						<h1>The image has expired or does not exist.</h1>
 			<%		}
 				}else

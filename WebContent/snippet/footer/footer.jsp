@@ -7,13 +7,11 @@
 			<p>
 				<a href="#">Home</a>
 				·
-				<a href="#">Blog</a>
-				·
-				<a href="#">About</a>
+				<a href="#">About Us</a>
 				·
 				<a href="#">FAQ</a>
 				·
-				<a href="#">Contact</a>
+				<a href="contact/contact.html">Contact</a>
 			</p>
 		</div>
 		<div class="footer-right text-right col-lg-4 col-md-4">

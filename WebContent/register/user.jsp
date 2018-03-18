@@ -12,21 +12,21 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta name="description" content="">
       <meta name="author" content="">
-      <title>Control Privacy - user</title>
       <%@ include file="../snippet/login/bootstrap.jsp" %>
       
       <!-- Page level plugin CSS-->
       <link href="register/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
       
-      <script type="text/javascript" src="js/user.js"></script>
-   </head>
-   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+      <script type="text/javascript" src="js/user.js"></script>     
       <%
          User user=null;
           if(session.getAttribute("user")==null)
             response.sendRedirect("login.html");
           else{
             user=(User) session.getAttribute("user");%>
+      <title>Control Privacy - <%=user.getName() %></title>
+   </head>
+   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
       <%@ include file="../snippet/header/headerUser.jsp" %>
       <div class="content-wrapper">
          <div class="container-fluid">

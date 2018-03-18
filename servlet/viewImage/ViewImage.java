@@ -2,6 +2,7 @@ package viewimage;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -74,11 +75,17 @@ public class ViewImage extends HttpServlet {
 			Image image=new Image(url_redirect,relativePath , new User("0","anonymous"), Fecha.fechaActual(), Fecha.sumarMesesFecha(Fecha.fechaActual(), timeExpired));
 			
 			ServiceImage sImage=new ServiceImage();
-			sImage.createImage(image);
-			
+			try{
+				sImage.createImage(image);
+			}catch(SQLException e){
+				image=sImage.recoverImageForUrl(image.getUrl_image());
+				
+			}
+				
 			FileMetadata fm=new FileMetadata(folder);
 			Statistic_file statistic_file=new Statistic_file("ViewImage", fm.readExtensionFile(), Fecha.fechaActual());
 			ServiceStatistic_file sStatistic=new ServiceStatistic_file();
+			
 			sStatistic.create(statistic_file);
 			
 			request.setAttribute("image", url_redirect);

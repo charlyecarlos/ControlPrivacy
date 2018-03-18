@@ -10,17 +10,19 @@ public class DbQuery {
 	
 	// USERS
 	
-	private static final String CreateUser="INSERT INTO USERS (ID_USER,NAME,EMAIL,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE) VALUES(?,?,?,?,?,?,?,?,?,?)";
+	private static final String CreateUser="INSERT INTO USERS (ID_USER,EMAIL,NAME,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE) VALUES(?,?,?,?,?,?,?,?,?,?)";
 	private static final String UpdateUser="UPDATE USERS SET EMAIL=?,NAME=?,PWD=?,TYPE=?,ACCESS_FAIL=?,DATE_CREATION=?,DATE_LAST_ACCESS=?,LOCKED=?,ACTIVE=? WHERE ID_USER=?";
-	private static final String RecoverUser="SELECT ID_USER,NAME,EMAIL,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE FROM USERS WHERE EMAIL=?";
+	private static final String RecoverUser="SELECT ID_USER,EMAIL,NAME,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE FROM USERS WHERE EMAIL=?";
 	private static final String DeleteUser="DELETE FROM USERS WHERE ID_USER=?";
-	private static final String FindAllOrderByDateCreation="SELECT ID_USER,NAME,EMAIL,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE FROM USERS ORDER BY DATE_CREATION";
+	private static final String FindAllOrderByDateCreation="SELECT ID_USER,EMAIL,NAME,PWD,TYPE,ACCESS_FAIL,DATE_CREATION,DATE_LAST_ACCESS,LOCKED,ACTIVE FROM USERS ORDER BY DATE_CREATION";
 	
 	// IMAGES
 	
 	private static final String CreateImage="INSERT INTO IMAGES (URL_REDIRECT,URL_IMAGE,OWNER,DATE_CREATION,EXPIRATION_DATE,VISITS) VALUES (?,?,?,?,?,?)";
+	private static final String UpdateImage="UPDATE images SET URL_IMAGE=?,OWNER=?,DATE_CREATION=?,EXPIRATION_DATE=?,VISITS=? WHERE URL_REDIRECT=?";
 	private static final String RecoverImage="SELECT URL_REDIRECT,URL_IMAGE,OWNER,DATE_CREATION,EXPIRATION_DATE,VISITS FROM IMAGES WHERE URL_REDIRECT=?";
 	private static final String RecoverImageForUser="SELECT URL_REDIRECT,URL_IMAGE,OWNER,DATE_CREATION,EXPIRATION_DATE,VISITS FROM IMAGES WHERE OWNER=?";
+	private static final String RecoverImageForUrl="SELECT URL_REDIRECT,URL_IMAGE,OWNER,DATE_CREATION,EXPIRATION_DATE,VISITS FROM IMAGES WHERE URL_IMAGE=?";
 	
 	// COUNTERS
 	
@@ -74,12 +76,20 @@ public class DbQuery {
 		return CreateImage;
 	}
 
+	public static String getUpdateimage() {
+		return UpdateImage;
+	}
+
 	public static String getRecoverimage() {
 		return RecoverImage;
 	}
 	
 	public static String getRecoverimageforuser(){
 		return RecoverImageForUser;
+	}
+
+	public static String getRecoverimageforurl() {
+		return RecoverImageForUrl;
 	}
 
 	public static String getRecovercounters() {

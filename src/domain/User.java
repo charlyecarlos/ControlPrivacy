@@ -42,51 +42,57 @@ public class User {
 	private String locked="N";
 	private String active="N";
 	
-// para crear un us con la PK
+	// para crear un us con la PK
 	
-public User (String id_user,String email){
-	this.id_user=id_user;
-	this.email=email;
-}
-	
-public  User(String email)  {
-	this.email=email;
+	public User (String id_user,String email){
+		this.id_user=id_user;
+		this.email=email;
 	}
-// para crear un us
-public User(String name,String email,String password, Type_User type,Timestamp date_creation,Timestamp date_last_access) {
-	setPassword(password);
-	setName(name);
-	setType(type);
-	setEmail(email);
-	setDate_Creation(date_creation);
-	setDate_last_access(date_last_access);
-	setAccessfail(0);
-	setLocked("N");
-	setActive("Y");
-}
-	/**
- * @param pwd
- * @param type
- * @param email
- * @param accessfail
- * @param date_creation
- * @param date_last_access
- * @param locked
- * @param active
- */
-public User(String id_user, String email,String name, String pwd, Type_User type,int access_fail,Timestamp date_creation,Timestamp date_last_access,String locked, String active) {
-	this.id_user=id_user;
-	this.name=name;
-	this.pwd = pwd;
-	this.type = type;
-	this.email = email;
-	this.access_fail = access_fail;
-	this.date_creation=date_creation;
-	this.date_last_access=date_last_access;
-	this.locked = locked;
-	this.active = active;
-}
+		
+	public  User(String email)  {
+		this.email=email;
+		}
+	// para crear un us
+	public User(String name,String email,String password, Type_User type,Timestamp date_creation,Timestamp date_last_access) {
+		setPassword(password);
+		setName(name);
+		setType(type);
+		setEmail(email);
+		setDate_Creation(date_creation);
+		setDate_last_access(date_last_access);
+		setAccessfail(0);
+		setLocked("N");
+		setActive("Y");
+	}
+		/**
+	 * @param pwd
+	 * @param type
+	 * @param email
+	 * @param accessfail
+	 * @param date_creation
+	 * @param date_last_access
+	 * @param locked
+	 * @param active
+	 */
+	public User(String id_user, String email,String name, String pwd, Type_User type,int access_fail,Timestamp date_creation,Timestamp date_last_access,String locked, String active) {
+		this.id_user=id_user;
+		this.name=name;
+		this.pwd = pwd;
+		this.type = type;
+		this.email = email;
+		this.access_fail = access_fail;
+		this.date_creation=date_creation;
+		this.date_last_access=date_last_access;
+		this.locked = locked;
+		this.active = active;
+	}
 	public User() {}
+	
+	public static User createUserWithId_user(String id_user){
+		User user=new User();
+		user.setId_user(id_user);
+		return user;
+	}
 	
 	/**
 	 * @return id user

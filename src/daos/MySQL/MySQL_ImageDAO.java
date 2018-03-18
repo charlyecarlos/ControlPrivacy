@@ -13,7 +13,6 @@ import domain.Image;
 import domain.User;
 
 import exceptions.DAOException;
-
 import recursos.DbQuery;
 import recursos.Recursos;
 
@@ -33,7 +32,7 @@ public class MySQL_ImageDAO implements ImageDAO{
 	}
 	
 	@Override
-	public void create(Image image) throws DAOException {
+	public void create(Image image) throws SQLException {
 		PreparedStatement stat = null;
 		ResultSet rs=null;
 		try {
@@ -58,6 +57,8 @@ public class MySQL_ImageDAO implements ImageDAO{
 				throw new DAOException("The image already exists.");
 			else if(e.getErrorCode() == ORACLE_FAIL_FK)
 				throw new DAOException("Operation out of service, try again later.");
+			else if(e.getErrorCode()==1062)
+				throw new SQLException(e.getMessage());
 			else
 				throw new DAOException(DB_ERR,e);
 		}finally{
@@ -67,8 +68,24 @@ public class MySQL_ImageDAO implements ImageDAO{
 
 	@Override
 	public int update(Image image) throws DAOException {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement stat = null;
+		try {			
+			stat=con.prepareStatement(DbQuery.getUpdateimage());
+			stat.setString(1, image.getUrl_image());
+			stat.setString(2, image.getOwner().getId_user());
+			stat.setTimestamp(3, image.getDate_creation());
+			stat.setTimestamp(4, image.getExpiration_date());
+			stat.setInt(5, image.getVisits());
+			stat.setString(6, image.getUrl_redirect());
+			return stat.executeUpdate();
+		} catch (SQLException e) {
+			if(e.getErrorCode() == ORACLE_FAIL_FK)
+				throw new DAOException("Operation out of service, try again later.");
+			else
+				throw new DAOException(DB_ERR,e);
+		}finally{
+			Recursos.closePreparedStatement(stat);
+		}
 	}
 
 	@Override
@@ -82,7 +99,7 @@ public class MySQL_ImageDAO implements ImageDAO{
 			if (rs.next()){
 			image=new Image(rs.getString(1),
 						  rs.getString(2),
-						  new User(rs.getString(3)),
+						  User.createUserWithId_user(rs.getString(3)),
 						  rs.getTimestamp(4),
 						  rs.getTimestamp(5),
 						  rs.getInt(6)
@@ -110,7 +127,7 @@ public class MySQL_ImageDAO implements ImageDAO{
 			while (rs.next()){
 			images.add(new Image(rs.getString(1),
 							  rs.getString(2),
-							  new User(rs.getString(3)),
+							  User.createUserWithId_user(rs.getString(3)),
 							  rs.getTimestamp(4),
 							  rs.getTimestamp(5),
 							  rs.getInt(6)
@@ -135,6 +152,33 @@ public class MySQL_ImageDAO implements ImageDAO{
 	public List<Image> findAll() throws DAOException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Image recoverImageForUrl(String url_image) throws DAOException {
+		PreparedStatement stat=null;
+		ResultSet rs=null;
+		Image image=Image.createImageWithUrl(url_image);
+		try {
+			stat = con.prepareStatement(DbQuery.getRecoverimageforurl());
+			stat.setString(1,image.getUrl_image());
+			rs=stat.executeQuery();
+			if (rs.next()){
+			image=new Image(rs.getString(1),
+						  rs.getString(2),
+						  User.createUserWithId_user(rs.getString(3)),
+						  rs.getTimestamp(4),
+						  rs.getTimestamp(5),
+						  rs.getInt(6)
+						 );
+			}
+		} catch (SQLException e) {
+			throw new DAOException(DB_ERR, e);
+		} finally {
+			Recursos.closeResultSet(rs);
+			Recursos.closePreparedStatement(stat);	
+		}
+		return image;
 	}
 
 }

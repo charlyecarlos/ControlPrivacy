@@ -268,7 +268,7 @@
 		<div class="footer-left">
 			<h3>Company<span>logo</span></h3>
 			<p class="footer-links">
-				<a href="#">Home</a> · <a href="#">About us</a> · <a href="#">Faq</a> · <a href="#">Contact</a>
+				<a href="#">Home</a> · <a href="#">About us</a> · <a href="#">Faq</a> · <a href="contact/contact.html">Contact</a>
 			</p>
 			<p class="footer-company-name">Control Privacy &copy; 2018</p>
 		</div>

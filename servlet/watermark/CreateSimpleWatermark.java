@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileUploadException;
 
@@ -40,7 +41,8 @@ public class CreateSimpleWatermark extends HttpServlet {
         String salida=null;
 		int numfilesubidos=0; 
 		FormMultiPart  datos=null;
-		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"));
+		HttpSession session=request.getSession();
+		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"))+"/"+session.getId();
 		try{	
 			File file=new File(path);
 			if (!file.exists())
