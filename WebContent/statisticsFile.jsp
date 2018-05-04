@@ -5,7 +5,7 @@
 <%@page import="services.ServiceImage" %>
 <%@page import="domain.Image" %>
 <%@page import="util.Fecha" %>
-<html xmlns='http://www.w3.org/1999/xhtml' lang='es' xml:lang='es'>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>
 <head>
 	<meta name='author' content='Carlos Campos' />
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
@@ -20,7 +20,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"></link>
 	
 	<!--titulo-->
-	<title>Image</title>
+	<title>File Analyse</title>
 </head>
 <body>
 	<!-- MENU -->
@@ -28,7 +28,7 @@
 	<!-- END MENU -->
 	
 	<div class="container">
-		<div class="col-lg-12">
+		<form method="post" action="deleteCleanMeta" class="col-lg-12">
 			<%List<Metadata> metadata=(List<Metadata>) request.getAttribute("Metadata");
 			if(metadata!=null){%>
 				<h1>File metadata</h1>
@@ -40,8 +40,8 @@
 				 			if(!pair){%>
 				 			<tr>
 				 			<%}%>
-								<td class="col-lg-2"><b><%= meta.getName() %>:</b></td>
-								<td class="col-lg-4"><span class="<%=meta.canRemove()?"glyphicon glyphicon-ok text-success":"glyphicon glyphicon-remove text-danger"%>"></span> <i style="color:<%= meta.isSensitive()?"red":"black" %>"> <%= meta.getData() %></i></td>
+								<td class="col-lg-2 col-md-4"><b><%= meta.getName() %>:</b></td>
+								<td class="col-lg-4 col-md-8"><span class="<%=meta.canRemove()?"glyphicon glyphicon-ok text-success":"glyphicon glyphicon-remove text-danger"%>"></span> <i style="color:<%= meta.isSensitive()?"red":"black" %>"> <%= meta.getData() %></i></td>
 							<%if(pair){%>
 				 			</tr>
 				 			<%pair=false;
@@ -51,13 +51,13 @@
 					</tbody>
 				</table>
 				<div class="text-right"><span class="glyphicon glyphicon-ok text-success"></span> = Can remove. &nbsp<span class="glyphicon glyphicon-remove text-danger"></span> = Can´t remove. &nbsp<i style='color:red'>Data sensitive.</i></div>
-				<br>
+				<br/>
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Delete</button>
 				</div>
 			<%}else
 				response.sendRedirect("http://localhost:8080/ControlPrivacy/cleanMeta.html");%>					
-		</div>
+		</form>
 	</div> 
 	
 	<!-- FOOTER -->

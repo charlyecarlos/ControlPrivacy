@@ -2,6 +2,7 @@ package meta;
 
 import org.w3c.dom.*;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 import javax.imageio.*;
@@ -11,10 +12,33 @@ import javax.imageio.metadata.*;
 public class MetadataImage {
 
 	public static void main(String[] args) {
+		String [] imagesUrl={"D:/Fotos/crb600f.jpg","D:/Fotos/playa.jpg"};
 		MetadataImage meta = new MetadataImage();
-		int length = args.length;
-		for (int i = 0; i < length; i++)
-			meta.readAndDisplayMetadata(args[i]);
+		
+		for (String folder : imagesUrl) {
+			System.out.println("Resolution "+folder+": "+meta.resolution(folder));
+			System.out.println();
+		}
+		
+		for (int i = 0; i < imagesUrl.length; i++){
+			meta.readAndDisplayMetadata(imagesUrl[i]);
+			System.out.println();
+		}
+	}
+	
+	public String resolution(String folder){
+		
+		BufferedImage bimg;
+		String resolution;
+		try {
+			bimg = ImageIO.read(new File(folder));
+			resolution = bimg.getWidth()+"x";
+			resolution += bimg.getHeight()+" px";
+			return resolution;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void readAndDisplayMetadata(String fileName) {

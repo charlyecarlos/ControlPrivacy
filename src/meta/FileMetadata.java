@@ -1,6 +1,9 @@
 package meta;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.Date;
 
 
@@ -35,8 +38,19 @@ public class FileMetadata {
 		return date;
 	}
 	
-	public void setLastModified(Long newLastModified){
-		file.setLastModified(newLastModified);
+	public boolean setLastModified(Long newLastModified){
+		return file.setLastModified(newLastModified);
+	}
+	
+	public String SizeFile() {
+		try{
+			BasicFileAttributes bfa;
+			bfa = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+			return bfa.size()+" bytes";
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

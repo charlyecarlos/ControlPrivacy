@@ -9,6 +9,7 @@ import daos.interfaces.Statistic_fileDAO;
 import domain.Statistic_file;
 import exceptions.DAOException;
 import recursos.DbQuery;
+import recursos.ErrOracle;
 import recursos.Recursos;
 
 public class MySQL_Statistic_fileDAO implements Statistic_fileDAO{
@@ -21,10 +22,6 @@ public class MySQL_Statistic_fileDAO implements Statistic_fileDAO{
 	
 	private static final String DB_ERR = "Database error";
 	
-	public static final int ORACLE_DUPLICATE_PK = 1;
-//	private static final int ORACLE_DELETE_FK = 2292;
-	private static final int ORACLE_FAIL_FK = 2291;
-	
 	@Override
 	public void create(Statistic_file statistic_file) throws DAOException {
 		PreparedStatement stat = null;
@@ -36,9 +33,9 @@ public class MySQL_Statistic_fileDAO implements Statistic_fileDAO{
 			stat.setTimestamp(4, statistic_file.getDate_analyse());
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode()== ORACLE_DUPLICATE_PK)
+			if(e.getErrorCode()== ErrOracle.ORACLE_DUPLICATE_PK.getCod_err())
 				throw new DAOException("the id_file already exists.");
-			else if(e.getErrorCode() == ORACLE_FAIL_FK)
+			else if(e.getErrorCode() == ErrOracle.ORACLE_FAIL_FK.getCod_err())
 				throw new DAOException("Operation out of service, try again later.");
 			else
 				throw new DAOException(DB_ERR,e);

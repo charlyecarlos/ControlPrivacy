@@ -54,14 +54,15 @@
 				</div>
 				<div class="item gradient-purple">
 					<div class="carousel-caption">
-						<h1>Carousel in a container</h1>
-						<p>This is a demo for the Bootstrap Carousel Guide.</p>
+						<h1> Create watermarks with your logo.</h1>
+						<p>If registered you can put your logos as watermark and manage 
+							them as you wish.</p>
 					</div>
 				</div>
 				<div class="item gradient-purple">
 					<div class="carousel-caption">
-						<h1>Carousel in a container</h1>
-						<p>This is a demo for the Bootstrap Carousel Guide.</p>
+						<h1>Create watermarks in different positions of the images.</h1>
+						<p>If you register, you can put the letters or logos in positions other than the Center.</p>
 					</div>
 				</div>
 			</div>

@@ -14,15 +14,13 @@ import domain.User;
 
 import exceptions.DAOException;
 import recursos.DbQuery;
+import recursos.ErrOracle;
 import recursos.Recursos;
 
 public class MySQL_ImageDAO implements ImageDAO{
 
 	private static final String DB_ERR = "Database error";
 	
-	public static final int ORACLE_DUPLICATE_PK = 1;
-//	private static final int ORACLE_DELETE_FK = 2292;
-	private static final int ORACLE_FAIL_FK = 2291;
 
 	
 	private Connection con;
@@ -53,9 +51,9 @@ public class MySQL_ImageDAO implements ImageDAO{
 			stat.setInt(6, image.getVisits());
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode()== ORACLE_DUPLICATE_PK)
+			if(e.getErrorCode()== ErrOracle.ORACLE_DUPLICATE_PK.getCod_err())
 				throw new DAOException("The image already exists.");
-			else if(e.getErrorCode() == ORACLE_FAIL_FK)
+			else if(e.getErrorCode() == ErrOracle.ORACLE_FAIL_FK.getCod_err())
 				throw new DAOException("Operation out of service, try again later.");
 			else if(e.getErrorCode()==1062)
 				throw new SQLException(e.getMessage());
@@ -79,7 +77,7 @@ public class MySQL_ImageDAO implements ImageDAO{
 			stat.setString(6, image.getUrl_redirect());
 			return stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode() == ORACLE_FAIL_FK)
+			if(e.getErrorCode() == ErrOracle.ORACLE_FAIL_FK.getCod_err())
 				throw new DAOException("Operation out of service, try again later.");
 			else
 				throw new DAOException(DB_ERR,e);

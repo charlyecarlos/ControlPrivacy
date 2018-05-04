@@ -22,8 +22,6 @@ public class MySQL_Type_UserDAO implements Type_UserDAO{
 	
 	private static final String DB_ERR = "Database error";
 	
-	public static final int ORACLE_DUPLICATE_PK = 1;
-//	private static final int ORACLE_DELETE_FK = 2292;
 	
 	@Override
 	public void create(Type_User type_user) throws DAOException {

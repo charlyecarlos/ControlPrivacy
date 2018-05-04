@@ -56,13 +56,18 @@
 								<input type="url" name="externalFile" class="form-control" placeholder="Search for..."></input>
 								<span class="input-group-btn">
 									<button class="btn btn-primary" type="submit">Analyse</button>
-								  </span>
+								</span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</form>	
-		</div>	
+		</div>
+		<%if(request.getAttribute("error")!=null){%>
+			<div class="alert alert-danger col-lg-6 col-lg-offset-3 text-center">
+				<p><%=request.getAttribute("error")%></p>
+			</div>
+		<%}%>
 	</div>
 
 	<!-- FOOTER -->

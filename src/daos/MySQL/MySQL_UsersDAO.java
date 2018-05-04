@@ -12,6 +12,7 @@ import domain.Type_User;
 import domain.User;
 import exceptions.DAOException;
 import recursos.DbQuery;
+import recursos.ErrOracle;
 import recursos.Recursos;
 
 public class MySQL_UsersDAO implements UsersDAO{
@@ -23,10 +24,6 @@ public class MySQL_UsersDAO implements UsersDAO{
 	}
 	
 	private static final String DB_ERR = "Database error";
-	
-	public static final int ORACLE_DUPLICATE_PK = 1;
-	private static final int ORACLE_DELETE_FK = 2292;
-	private static final int ORACLE_FAIL_FK = 2291;
 	
 	@Override
 	public void create(User user) throws DAOException {
@@ -52,8 +49,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 			
 			stat=con.prepareStatement(DbQuery.getCreateuser());
 			stat.setString(1, user.getId_user());
-			stat.setString(2, user.getName());
-			stat.setString(3, user.getEmail());
+			stat.setString(2, user.getEmail());
+			stat.setString(3, user.getName());
 			stat.setString(4, user.getPassword());
 			stat.setInt(5, user.getType().getType());
 			stat.setString(6,String.valueOf(user.getAccess_fail()));
@@ -63,9 +60,9 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(10, user.getActive());
 			stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode()== ORACLE_DUPLICATE_PK)
+			if(e.getErrorCode()== ErrOracle.ORACLE_DUPLICATE_PK.getCod_err())
 				throw new DAOException("the email already exists.");
-			else if(e.getErrorCode() == ORACLE_FAIL_FK)
+			else if(e.getErrorCode() == ErrOracle.ORACLE_FAIL_FK.getCod_err())
 				throw new DAOException("Operation out of service, try again later.");
 			else
 				throw new DAOException(DB_ERR,e);
@@ -89,8 +86,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 			Recursos.closePreparedStatement(stat);
 			
 			stat=con.prepareStatement(DbQuery.getUpdateuser());
-			stat.setString(1, user.getName());
-			stat.setString(2, user.getEmail());
+			stat.setString(1, user.getEmail());
+			stat.setString(2, user.getName());
 			stat.setString(3, user.getPassword());
 			stat.setInt(4, user.getType().getType());
 			stat.setString(5, String.valueOf(user.getAccess_fail()));
@@ -101,7 +98,7 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(10, user.getId_user());
 			num=stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode() == ORACLE_FAIL_FK)
+			if(e.getErrorCode() == ErrOracle.ORACLE_FAIL_FK.getCod_err())
 				throw new DAOException("Operation out of service, try again later.");
 			else
 				throw new DAOException(DB_ERR,e);
@@ -134,8 +131,8 @@ public class MySQL_UsersDAO implements UsersDAO{
 			Recursos.closePreparedStatement(stat);
 			
 			stat=con.prepareStatement(DbQuery.getUpdateuser());
-			stat.setString(1, user.getName());
-			stat.setString(2, user.getEmail());
+			stat.setString(1, user.getEmail());
+			stat.setString(2, user.getName());
 			stat.setString(3, user.getPassword());
 			stat.setInt(4, user.getType().getType());
 			stat.setString(5, String.valueOf(user.getAccess_fail()));
@@ -146,7 +143,7 @@ public class MySQL_UsersDAO implements UsersDAO{
 			stat.setString(10, user.getId_user());
 			num=stat.executeUpdate();
 		} catch (SQLException e) {
-			if(e.getErrorCode() == ORACLE_FAIL_FK)
+			if(e.getErrorCode() == ErrOracle.ORACLE_FAIL_FK.getCod_err())
 				throw new DAOException("Operation out of service, try again later.");
 			else
 				throw new DAOException(DB_ERR,e);
@@ -195,7 +192,7 @@ public class MySQL_UsersDAO implements UsersDAO{
 			st.setString(1, id_user);
 			delete = st.executeUpdate();
 		} catch (SQLException e) {
-			if (e.getErrorCode() == ORACLE_DELETE_FK)
+			if (e.getErrorCode() == ErrOracle.ORACLE_DELETE_FK.getCod_err())
 				throw new DAOException("Not allowed to delete user");
 			else
 				throw new DAOException(DB_ERR, e);

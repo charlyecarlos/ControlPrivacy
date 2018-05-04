@@ -112,6 +112,10 @@ public class TransactionManager {
 		return new MySQL_Statistics_indexDAO(con);
 	}
 	
+	public MySQL_ActivationDAO getActivationDAO(){
+		return new MySQL_ActivationDAO(con);
+	}
+	
 	public Connection getConexion() {
 		return con;
 	}

@@ -50,10 +50,52 @@ public class Mail {
 		this.message = message;
 	}
 
-	public boolean sendMail() {
+	public boolean sendMailToGmail() {
 		try {
 			Properties props = new Properties ();
 			props.put("mail.smtp.host", "smtp.gmail.com");  //Sólo acepta servidores de gmail
+			props.setProperty("mail.smtp.starttls.enable", "true");
+			props.setProperty("mail.smtp.port", "587");
+			props.setProperty("mail.smtp.user", userMail);
+			props.setProperty("mail.smtp.auth", "true");
+			
+			Session session = Session.getDefaultInstance(props, null);
+			BodyPart text = new MimeBodyPart();
+			text.setContent(message,"text/html");
+			
+			BodyPart attachment = new MimeBodyPart();
+			if (filePath != null) {
+				attachment.setDataHandler(new DataHandler(new FileDataSource(filePath)));
+				attachment.setFileName(fileName);
+			}
+			
+			MimeMultipart multiPart = new MimeMultipart();
+			multiPart.addBodyPart(text);
+			if (filePath != null) {
+				multiPart.addBodyPart(attachment);
+			}
+			
+			MimeMessage message = new MimeMessage (session);
+			message.setFrom(new InternetAddress(userMail));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(from));
+			message.setSubject(subject);
+			message.setContent(multiPart);
+			
+			Transport t = session.getTransport("smtp");
+			t.connect(userMail, password);
+			t.sendMessage(message, message.getAllRecipients());
+			t.close();
+			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean sendMail() {
+		try {
+			Properties props = new Properties ();
+			props.put("mail.smtp.host", "104.223.26.171");
 			props.setProperty("mail.smtp.starttls.enable", "true");
 			props.setProperty("mail.smtp.port", "587");
 			props.setProperty("mail.smtp.user", userMail);

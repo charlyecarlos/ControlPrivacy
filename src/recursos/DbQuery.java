@@ -42,6 +42,12 @@ public class DbQuery {
 	
 	private static final String ReadTypeFiles="SELECT TYPE_FILE, COUNT(*) FROM statistics_file GROUP BY TYPE_FILE ORDER BY 2 DESC";
 	
+	// ACTIVATION
+	
+	private static final String CreateActivation="INSERT INTO ACTIVATION (TOKEN,USER) VALUES(?,?)";
+	private static final String RecoverActivation="SELECT TOKEN,USER FROM ACTIVATION WHERE TOKEN=?";
+	private static final String DeleteActivation="DELETE FROM ACTIVATION WHERE TOKEN=?";
+	
 	// SET AND GET
 	
 	public static String getAlltimeimage() {
@@ -118,6 +124,18 @@ public class DbQuery {
 
 	public static String getReadtypefiles() {
 		return ReadTypeFiles;
+	}
+
+	public static String getCreateactivation() {
+		return CreateActivation;
+	}
+
+	public static String getRecoveractivation() {
+		return RecoverActivation;
+	}
+
+	public static String getDeleteactivation() {
+		return DeleteActivation;
 	}
 	
 }

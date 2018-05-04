@@ -17,6 +17,7 @@ import domain.Statistic_file;
 import exceptions.DomainException;
 import exceptions.ServiceException;
 import meta.FileMetadata;
+import services.ServiceMetadata;
 import services.ServiceStatistic_file;
 import util.Fecha;
 
@@ -38,7 +39,7 @@ public class CleanMeta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String salida=null;
+        String exit=null;
 		int numfilesubidos=0;
 		FormMultiPart  datos=null;
 		HttpSession session=request.getSession();
@@ -69,35 +70,31 @@ public class CleanMeta extends HttpServlet {
 //			System.out.println(namefile[namefile.length-1]);
 
 			String relativePath=getServletContext().getInitParameter("dirFileAnalyse")+"/"+session.getId()+"/"+namefile[namefile.length-1];
-
-			FileMetadata fm=new FileMetadata(folder);
 			
-			List<Metadata> metadata=new ArrayList<Metadata>();
+			ServiceMetadata sMetadata=new ServiceMetadata();
 			
-			//	Generic Metadata
-			metadata.add(new Metadata("Extension", fm.readExtensionFile(), false,false));
-			metadata.add(new Metadata("Last Modified", fm.readLastModified().toString(), true,true));
+			List<Metadata> metadata=sMetadata.readMetadata(folder);
 			
-			
-			Statistic_file statistic_file=new Statistic_file("FileAnalyse", fm.readExtensionFile(), Fecha.fechaActual());
+			Statistic_file statistic_file=new Statistic_file("FileAnalyse", metadata.get(0).toString(), Fecha.fechaActual());
 			ServiceStatistic_file sStatistic=new ServiceStatistic_file();
 			sStatistic.create(statistic_file);
 
+			session.setAttribute("urlFile", relativePath);
 			request.setAttribute("Metadata", metadata);
-			salida="/statisticsFile.jsp";
+			exit="/statisticsFile.html";
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				salida="/cleanMeta.jsp";	//Error Logic
+				exit="/cleanMeta.jsp";	//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/errorInternal.jsp";//Internal error
+				exit="/errorInternal.jsp";//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/cleanMeta.jsp";		//Error Logic
+			exit="/cleanMeta.jsp";		//Error Logic
 		}
-		getServletContext().getRequestDispatcher(salida).forward(request, response);	
+		getServletContext().getRequestDispatcher(exit).forward(request, response);	
 	}
 
 }

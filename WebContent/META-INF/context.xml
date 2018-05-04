@@ -3,6 +3,6 @@
 <Context>
 	<Resource name="PoolDeConexiones" auth="Container" type="javax.sql.DataSource"
 		maxActive="10" maxIdle="3" maxWait="10000" removeAbandoned="true"
-		username="adrian" password="adrian" driverClassName="com.mysql.jdbc.Driver"
+		username="controlprivacy" password="tjaGb8BCLixUe4UWJl3L" driverClassName="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://localhost/controlprivacy" />
 </Context>

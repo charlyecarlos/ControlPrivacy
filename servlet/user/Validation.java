@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import services.ServiceUser;
 import domain.User;
-import encrypt.EncryptMD5;
+import encrypt.Encrypt;
 
 import exceptions.DomainException;
 import exceptions.ServiceException;
@@ -75,7 +75,7 @@ public class Validation extends HttpServlet {
 	}
 	
 	private boolean validateUser(User user,ServiceUser suser,HttpServletRequest request) throws ServiceException {
-		String password=EncryptMD5.encryptMD5(request.getParameter("password"));
+		String password=Encrypt.encryptSHA256(request.getParameter("password"));
 		if(password.equals(user.getPassword())){
 			user.setAccessfail(0);
 			suser.update(user);

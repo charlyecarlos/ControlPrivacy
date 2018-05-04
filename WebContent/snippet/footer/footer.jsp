@@ -5,7 +5,7 @@
 		</div>
 		<div class="footer-left text-center navbar-brand col-lg-4 col-md-4">
 			<p>
-				<a href="#">Home</a>
+				<a href="index.html">Home</a>
 				·
 				<a href="#">About Us</a>
 				·

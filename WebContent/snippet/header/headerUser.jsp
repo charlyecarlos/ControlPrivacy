@@ -1,4 +1,7 @@
 
+<%@page import="domain.User"%>
+
+<% User userHeader=(User) session.getAttribute("user");%>
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">LOGO</a>
@@ -13,6 +16,7 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
+<!-- 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
           <a class="nav-link" href="charts.html">
             <i class="fa fa-fw fa-area-chart"></i>
@@ -25,6 +29,7 @@
             <span class="nav-link-text">Tables</span>
           </a>
         </li>
+ -->
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configuration">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
@@ -32,13 +37,14 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Administrator of logos</a>
+              <a href="logos.html">Administrator of logos</a>
             </li>
             <li>
-              <a href="cards.html">Settings</a>
+              <a href="settings.html">Settings</a>
             </li>
           </ul>
         </li>
+<!--
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
@@ -96,6 +102,7 @@
             <span class="nav-link-text">Link</span>
           </a>
         </li>
+ -->
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
@@ -105,6 +112,7 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+<!--
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-envelope"></i>
@@ -193,6 +201,10 @@
               </span>
             </div>
           </form>
+        </li>
+-->
+		<li class="nav-item">
+              <label class="nav-link">Hello <%= userHeader.getName()%>,</label>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">

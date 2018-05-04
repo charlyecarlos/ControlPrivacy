@@ -82,6 +82,22 @@
     <url-pattern>/user.html</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>logos.html</servlet-name>
+    <jsp-file>/register/logos.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logos.html</servlet-name>
+    <url-pattern>/logos.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>settings.html</servlet-name>
+    <jsp-file>/register/settings.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>settings.html</servlet-name>
+    <url-pattern>/settings.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Validation</servlet-name>
     <servlet-class>user.Validation</servlet-class>
   </servlet>
@@ -96,6 +112,22 @@
   <servlet-mapping>
     <servlet-name>CleanMeta</servlet-name>
     <url-pattern>/CleanMeta</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>statisticsFile.html</servlet-name>
+    <jsp-file>/statisticsFile.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>statisticsFile.html</servlet-name>
+    <url-pattern>/statisticsFile.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>deleteMetadataFile.html</servlet-name>
+    <jsp-file>/deleteMetadataFile.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteMetadataFile.html</servlet-name>
+    <url-pattern>/deleteMetadataFile.html</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ViewImage</servlet-name>
@@ -123,7 +155,7 @@
   </servlet-mapping>
   <context-param>
     <param-name>mail</param-name>
-    <param-value>a@gmail.com</param-value>
+    <param-value>a</param-value>
   </context-param>
   <context-param>
     <param-name>passwordMail</param-name>

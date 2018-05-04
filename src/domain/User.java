@@ -16,7 +16,7 @@ public class User {
 	
 	private static final String ERM_password = "invalid password";
 	private static final int password_MIN = 1;
-	private static final int password_MAX = 32;
+	private static final int password_MAX = 64;
 	
 	private static final String ERM_accessfail = "number of failed accesses maximum 3";
 	

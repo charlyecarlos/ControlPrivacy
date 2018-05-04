@@ -1,10 +1,13 @@
 package watermark;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.UUID;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletException;
@@ -48,7 +51,6 @@ public class CreateMultipleWatermark extends HttpServlet {
 		int numfilesubidos=0; 
 		FormMultiPart  datos=null;
 		HttpSession session=request.getSession();
-
         User user=(User) session.getAttribute("user");
 		
 		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"))+"/"+session.getId();
@@ -66,6 +68,7 @@ public class CreateMultipleWatermark extends HttpServlet {
 				String watermark= datos.getFieldForm("textWatermark");
 				if(watermark.isEmpty())
 					throw new ServiceException("The watermark can´t be empty");
+				System.out.println(datos.getNameFile("position"));
 				
 				try{
 					 numfilesubidos=datos.SubirFicheros();
@@ -86,29 +89,55 @@ public class CreateMultipleWatermark extends HttpServlet {
 			Statistic_file statistic_file;
 			ServiceStatistic_file sStatistic;
 			
-			File pathfile=new File("dir/"+user.getEmail()+"/"+Fecha.fechaActual().toString()+".zip");
-			if (!pathfile.exists())
-				pathfile.mkdirs();
-			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(pathfile.getAbsolutePath()));
+			String pathfile="dir/multiplefiles/"+user.getEmail()+"/"+UUID.randomUUID()+".zip";
+			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(new File(pathfile)));
 			zip.setLevel(Deflater.DEFAULT_COMPRESSION);
 			zip.setMethod(Deflater.DEFLATED);
-
+			
+			String position=datos.getFieldForm("position");
+			System.out.println(position);
+			
+			ZipEntry entrada;
+			FileInputStream fis;
+			int read;
 			for (String folder : folders) {
 				fm=new FileMetadata(folder);
 				image=new File(folder);
-				WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.CENTERED);				
+
+				switch(position){
+				case "centered":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.CENTERED);break;
+				case "upper_left":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.UPPER_LEFT);break;
+				case "upper_right":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.UPPER_RIGHT);break;
+				case "delow_left":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.DELOW_LEFT);break;
+				case "delow_right":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.DELOW_RIGHT);break;
+				}
+
+				entrada = new ZipEntry(image.getName());
+				zip.putNextEntry(entrada);
 				
-				zip.putNextEntry(new ZipEntry(folder));
+				fis = new FileInputStream(folder);
+				byte [] buffer = new byte[1024];
+				read=0;
+				while (0 < (read=fis.read(buffer))){
+				   zip.write(buffer,0,read);
+				}
+				fis.close();
+				zip.closeEntry();
 				
 				statistic_file=new Statistic_file("Watermark", fm.readExtensionFile(), Fecha.fechaActual());
 				sStatistic=new ServiceStatistic_file();
 				sStatistic.create(statistic_file);
 			}
 			zip.close();
-			session.setAttribute("zip", pathfile.getAbsolutePath());
+			session.setAttribute("zip", pathfile);
 			salida="/successfullyCompleted_MultipleWatermark.jsp";
 		
-		} catch (ServiceException e) {
+		}catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
 				salida="/watermark-Picture.jsp";//Error Logic
@@ -118,8 +147,7 @@ public class CreateMultipleWatermark extends HttpServlet {
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/watermark-Picture.jsp";//Error Logic
-			
+			salida="/watermark-Picture.jsp";//Error Logic	
 		}
 		
 		getServletContext().getRequestDispatcher(salida).forward(request, response);
