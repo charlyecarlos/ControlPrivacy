@@ -4,5 +4,5 @@ function Download(url) {
 };
 
 function download(){
-	document.getElementById("download").click();
-}
+	//document.getElementById("download").click();
+};

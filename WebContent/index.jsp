@@ -260,16 +260,17 @@
         </article>
 	</section>
 	<section class="gradient-blue">
-		<article class="col-lg-10 col-lg-offset-1"></article>
+		<article class="col-lg-10 col-lg-offset-1">
+		</article>
 	</section>
 
 	<link rel="stylesheet" href="css/demo.css">
 	
 	<footer class="footer-distributed">
 		<div class="footer-left">
-			<h3>Company<span>logo</span></h3>
+			<img class="logo-footer" src="./img/logo.png">
 			<p class="footer-links">
-				<a href="#">Home</a> · <a href="#">About us</a> · <a href="#">Faq</a> · <a href="contact/contact.html">Contact</a>
+				<a href="#">Home</a> · <a href="PrivacyPolicy.html">Privacy Policy</a> · <a href="#">Faq</a> · <a href="contact/contact.html">Contact</a>
 			</p>
 			<p class="footer-company-name">Control Privacy &copy; 2018</p>
 		</div>

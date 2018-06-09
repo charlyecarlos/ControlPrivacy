@@ -1,4 +1,4 @@
-package recursos;
+package resources;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

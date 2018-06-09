@@ -19,7 +19,7 @@
     <div class="shadow card card-register mx-auto mt-5">
       <h1 class="card-header login text-center">Register an Account</h1>
       <div class="card-body">
-        <form method="post" action="/ControlPrivacy/Register">
+        <form method="post" action="Register">
         	<%if(request.getAttribute("error")!=null){%> 		
 				<div class="alert alert-danger col-lg-12 text-center">
 					<p style="margin-bottom:0px;"><%=request.getAttribute("error")%></p>

@@ -8,9 +8,9 @@ import java.util.List;
 import daos.interfaces.Statistic_fileDAO;
 import domain.Statistic_file;
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.ErrOracle;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.ErrOracle;
+import resources.Recursos;
 
 public class MySQL_Statistic_fileDAO implements Statistic_fileDAO{
 

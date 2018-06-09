@@ -7,17 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import services.ServiceUser;
 import domain.User;
 import encrypt.Encrypt;
-
 import exceptions.DomainException;
 import exceptions.ServiceException;
+import services.ServiceUser;
 
 /**
- * Servlet implementation class Validation
+ * Servlet implementation class ChangePassword
  */
-public class Validation extends HttpServlet {
+
+public class ChangePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,51 +31,43 @@ public class Validation extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String output="";
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		String newPassword = request.getParameter("newPassword");
+		
 		ServiceUser suser=new ServiceUser();
-		HttpSession session=request.getSession(false);
-		if(session!=null)
-			session.invalidate();
-		session=request.getSession();
-		User user;
+		String output = "";
+		
 		try {
-			user=new User(request.getParameter("email"));
-			user=suser.recoverComplete(user);
-			if (user!=null)
-				if (user.getLocked().equals("Y")){
-					request.setAttribute("user", user);
-					output="unlockUser.jsp";
-				}else
-					if (validateUser(user, suser, request)){
-						session=request.getSession();
-						session.setAttribute("user", user);
-						switch (user.getType().getDescription()){
-							case "Administrator":output="admin.html";break;
-							case "User":output="user.html";break;
-						}
+			if (validateUser(user, suser, request.getParameter("lastPassword")))
+				if(newPassword.equals(request.getParameter("repeatNewPassword"))){
+					user.setPassword(Encrypt.encryptSHA256(newPassword));
+					if(suser.update(user)!=0){
+						session.setAttribute("notify","Changed password successfully");
+						output="settings.html";
 					}else
-						throw new DomainException("The password is wrong.");
-			else if(request.getParameter("email").isEmpty())
-				throw new ServiceException("Email cannot be empty.");
-			else
-				throw new ServiceException("The email does not exist.");
+						throw new DomainException("A problem has occurred, again intentardo in a few minutes ");
+						
+				}else
+					throw new DomainException("The password is wrong.");
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				session.setAttribute("error",e.getMessage());
-				output="login.html";
+				output="settings.html";
 			}else{
 				e.printStackTrace();
 				output="errorInternal.jsp";
 			}
 		}catch (DomainException e) {
 			session.setAttribute("error",e.getMessage());
-			output="login.html";
+			output="settings.html";
 		}
 		response.sendRedirect(response.encodeRedirectURL(output));
 	}
-	
-	private boolean validateUser(User user,ServiceUser suser,HttpServletRequest request) throws ServiceException {
-		String password=Encrypt.encryptSHA256(request.getParameter("password"));
+
+	private boolean validateUser(User user,ServiceUser suser,String password) throws ServiceException {
+		password=Encrypt.encryptSHA256(password);
 		if(password.equals(user.getPassword())){
 			user.setAccessfail(0);
 			suser.update(user);
@@ -85,5 +77,4 @@ public class Validation extends HttpServlet {
 			return false;
 		}
 	}
-
 }

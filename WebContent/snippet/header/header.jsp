@@ -1,3 +1,5 @@
+	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
+	<link rel='stylesheet' type='text/css' href='css/header.css'>
 	<nav class="navbar navbar-default fixed-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -8,7 +10,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.html">LOGO</a>
+				<a class="navbar-brand-logo" href="index.html"><img class="logo-header" src="./img/logo.png"></a>
 			</div>
 		 
 			<!-- Collect the nav links, forms, and other content for toggling -->

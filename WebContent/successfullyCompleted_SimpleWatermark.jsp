@@ -16,30 +16,31 @@
 	<%@ include file="snippet/util/bootstrap.jsp" %>
 	<!-- END BOOTSTRAP -->
 
-	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css'>
+	<link rel='stylesheet' type='text/css' href='css/staticPrincipalPages.css' />
 	<script type='text/javascript' src='js/inputFile.js'></script>
-	<link rel='stylesheet' type='text/css' href='css/viewImage.css'>
+	<link rel='stylesheet' type='text/css' href='css/viewImage.css' />
 	<script type='text/javascript' src='js/downloadWatermark.js'></script>
 	
 
-	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Ultra" rel="stylesheet" /> 
 	
 	<!-- TITLE -->
 	<title>Clean Meta</title>
 </head>
-<body onload="download()">
+ <body onload="download()" > 
 	<!-- MENU -->
 	<%@ include file="snippet/header/header.jsp" %>
 	<!-- END MENU -->
 	<iframe id="imageDownload" style="display:none;" src="<%=request.getAttribute("image")%>"></iframe>
+	<% request.setAttribute("image", request.getAttribute("image")); %>
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>Successfully Completed</h1>
-			<p>If the download does not start directly <a id="download") href='<%=request.getAttribute("image")%>' download>click here</a></p>
+			<p>If the download does not start directly <a id="download" href='Download?image=<%=request.getAttribute("image")%>' download>click here</a></p>
 		</div>
 		<br></br>
-		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">	
-			<img src="<%= request.getAttribute("image") %>"/>
+		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+			<img src="ViewWatermarkImage?image=<%= request.getAttribute("image") %>"/>
 		</div>
 	</div>
 	<%

@@ -98,6 +98,14 @@
     <url-pattern>/settings.html</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ChangePassword</servlet-name>
+    <servlet-class>user.ChangePassword</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangePassword</servlet-name>
+    <url-pattern>/ChangePassword</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>Validation</servlet-name>
     <servlet-class>user.Validation</servlet-class>
   </servlet>
@@ -130,12 +138,52 @@
     <url-pattern>/deleteMetadataFile.html</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>PrivacyPolicy.html</servlet-name>
+    <jsp-file>/PrivacyPolicy.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrivacyPolicy.html</servlet-name>
+    <url-pattern>/PrivacyPolicy.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>successfullyCompleted_SimpleWatermark.html</servlet-name>
+    <jsp-file>/successfullyCompleted_SimpleWatermark.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>successfullyCompleted_SimpleWatermark.html</servlet-name>
+    <url-pattern>/successfullyCompleted_SimpleWatermark.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>successfullyCompleted_MultipleWatermark.html</servlet-name>
+    <jsp-file>/successfullyCompleted_MultipleWatermark.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>successfullyCompleted_MultipleWatermark.html</servlet-name>
+    <url-pattern>/successfullyCompleted_MultipleWatermark.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ViewImage</servlet-name>
     <servlet-class>viewimage.ViewImage</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ViewImage</servlet-name>
     <url-pattern>/ViewImage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Download</servlet-name>
+    <servlet-class>watermark.Download</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Download</servlet-name>
+    <url-pattern>/Download</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewWatermarkImage</servlet-name>
+    <servlet-class>watermark.ViewWatermarkImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewWatermarkImage</servlet-name>
+    <url-pattern>/ViewWatermarkImage</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CreateSimpleWatermark</servlet-name>
@@ -155,11 +203,11 @@
   </servlet-mapping>
   <context-param>
     <param-name>mail</param-name>
-    <param-value>a</param-value>
+    <param-value>no-reply@controlprivacy.net</param-value>
   </context-param>
   <context-param>
     <param-name>passwordMail</param-name>
-    <param-value>a</param-value>
+    <param-value></param-value>
   </context-param>
   <context-param>
     <param-name>dirWatermark</param-name>

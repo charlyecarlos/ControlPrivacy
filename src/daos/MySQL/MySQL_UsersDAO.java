@@ -11,9 +11,9 @@ import daos.interfaces.UsersDAO;
 import domain.Type_User;
 import domain.User;
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.ErrOracle;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.ErrOracle;
+import resources.Recursos;
 
 public class MySQL_UsersDAO implements UsersDAO{
 	

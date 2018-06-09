@@ -13,9 +13,9 @@ import domain.Image;
 import domain.User;
 
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.ErrOracle;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.ErrOracle;
+import resources.Recursos;
 
 public class MySQL_ImageDAO implements ImageDAO{
 

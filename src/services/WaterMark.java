@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 
 
 import exceptions.ServiceException;
-import recursos.Position;
+import resources.Position;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

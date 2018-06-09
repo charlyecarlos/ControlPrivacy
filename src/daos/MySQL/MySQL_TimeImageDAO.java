@@ -11,8 +11,8 @@ import daos.interfaces.TimeImageDAO;
 
 import domain.TimeImage;
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.Recursos;
 
 public class MySQL_TimeImageDAO implements TimeImageDAO{
 	private static final String DB_ERR = "Error de la base de datos";

@@ -140,30 +140,36 @@ iframe {
 [ Contact ]*/
 
 .container-contact100 {
-  width: 100%;  
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background: #d867c6;
-  background: -webkit-linear-gradient(45deg, #c77ff2, #e8519e);
-  background: -o-linear-gradient(45deg, #c77ff2, #e8519e);
-  background: -moz-linear-gradient(45deg, #c77ff2, #e8519e);
-  background: linear-gradient(45deg, #c77ff2, #e8519e);
-  
+	width: 100%;  
+	min-height: 100vh;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+  	padding: 15px;
+	background: rgba(210,231,245,0.29);
+	background: -moz-linear-gradient(45deg, rgba(210,231,245,0.29) 0%, rgba(230,242,250,0.35) 36%, rgba(224,241,252,0.4) 63%, rgba(222,237,247,0.47) 100%);
+	background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(210,231,245,0.29)), color-stop(36%, rgba(230,242,250,0.35)), color-stop(63%, rgba(224,241,252,0.4)), color-stop(100%, rgba(222,237,247,0.47)));
+	background: -webkit-linear-gradient(45deg, rgba(210,231,245,0.29) 0%, rgba(230,242,250,0.35) 36%, rgba(224,241,252,0.4) 63%, rgba(222,237,247,0.47) 100%);
+	background: -o-linear-gradient(45deg, rgba(210,231,245,0.29) 0%, rgba(230,242,250,0.35) 36%, rgba(224,241,252,0.4) 63%, rgba(222,237,247,0.47) 100%);
+	background: -ms-linear-gradient(45deg, rgba(210,231,245,0.29) 0%, rgba(230,242,250,0.35) 36%, rgba(224,241,252,0.4) 63%, rgba(222,237,247,0.47) 100%);
+	background: linear-gradient(45deg, rgba(210,231,245,0.29) 0%, rgba(230,242,250,0.35) 36%, rgba(224,241,252,0.4) 63%, rgba(222,237,247,0.47) 100%);
 }
 
 .wrap-contact100 {
-  width: 790px;
-  background: #fff;
-  border-radius: 2px;
-  padding: 40px 60px 58px 45px;
+	margin-top:30px;
+  	width: 790px;
+	background: #fff;
+	border-radius: 2px;
+	padding: 40px 60px 58px 45px;
+  	-webkit-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+  
 }
 
 

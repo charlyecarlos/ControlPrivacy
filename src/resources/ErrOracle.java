@@ -1,4 +1,4 @@
-package recursos;
+package resources;
 
 public enum ErrOracle {
 

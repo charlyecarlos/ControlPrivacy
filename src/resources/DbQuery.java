@@ -1,4 +1,4 @@
-package recursos;
+package resources;
 
 public class DbQuery {
 	
@@ -31,16 +31,16 @@ public class DbQuery {
 	
 	// STATISTIC_FILE
 	
-	private static final String CreateStatistic_file="INSERT INTO statistics_file(ID_FILE, MODULE, TYPE_FILE, DATE_ANALYSE) VALUES (?,?,?,?)";
+	private static final String CreateStatistic_file="INSERT INTO STATISTICS_FILE(ID_FILE, MODULE, TYPE_FILE, DATE_ANALYSE) VALUES (?,?,?,?)";
 	
-	private static final String RecoverType_file="SELECT TYPE_FILE,COUNT(*) FROM statistics_file GROUP BY TYPE_FILE";
+	private static final String RecoverType_file="SELECT TYPE_FILE,COUNT(*) FROM STATISTICS_FILE GROUP BY TYPE_FILE";
 	
 	// STATISTICS_INDEX
 	
 	private static final String ReadStatisticsUser="SELECT DATE_FORMAT(DATE_CREATION,'%m') MONTH,DATE_FORMAT(DATE_CREATION,'%Y') YEAR,COUNT(*) CONT FROM USERS GROUP BY DATE_FORMAT(DATE_CREATION,'%m %Y') ORDER BY YEAR,MONTH";
-	private static final String ReadStatistics="SELECT DATE_FORMAT(DATE_ANALYSE,'%m') MONTH,DATE_FORMAT(DATE_ANALYSE,'%Y') YEAR ,COUNT(*) COUNT FROM statistics_file WHERE MODULE=? GROUP BY DATE_FORMAT(DATE_ANALYSE,'%m %Y')";
+	private static final String ReadStatistics="SELECT DATE_FORMAT(DATE_ANALYSE,'%m') MONTH,DATE_FORMAT(DATE_ANALYSE,'%Y') YEAR ,COUNT(*) COUNT FROM STATISTICS_FILE WHERE MODULE=? GROUP BY DATE_FORMAT(DATE_ANALYSE,'%m %Y')";
 	
-	private static final String ReadTypeFiles="SELECT TYPE_FILE, COUNT(*) FROM statistics_file GROUP BY TYPE_FILE ORDER BY 2 DESC";
+	private static final String ReadTypeFiles="SELECT TYPE_FILE, COUNT(*) FROM STATISTICS_FILE GROUP BY TYPE_FILE ORDER BY 2 DESC";
 	
 	// ACTIVATION
 	

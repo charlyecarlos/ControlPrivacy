@@ -15,7 +15,7 @@ import domain.Statistic_file;
 import exceptions.DomainException;
 import exceptions.ServiceException;
 import meta.FileMetadata;
-import recursos.Position;
+import resources.Position;
 import services.ServiceStatistic_file;
 import services.WaterMark;
 import util.Fecha;
@@ -36,13 +36,15 @@ public class CreateSimpleWatermark extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String salida=null;
+        String output=null;
 		int numfilesubidos=0; 
 		FormMultiPart  datos=null;
 		HttpSession session=request.getSession();
-		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"))+"/"+session.getId();
+		String path=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"))+File.separator+session.getId();
 		try{	
 			File file=new File(path);
 			if (!file.exists())
@@ -81,24 +83,25 @@ public class CreateSimpleWatermark extends HttpServlet {
 				ServiceStatistic_file sStatistic=new ServiceStatistic_file();
 				sStatistic.create(statistic_file);
 				
-				request.setAttribute("image", getServletContext().getInitParameter("dirWatermark")+"/"+image.getName());
-				salida="/successfullyCompleted_SimpleWatermark.jsp";
+				//request.setAttribute("image", path+File.separator+image.getName());
+				request.setAttribute("image", image.getName());
+				output="successfullyCompleted_SimpleWatermark.html";
 				
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				salida="/watermark-Picture.jsp";//Error Logic
+				output="watermark-Picture.html";//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/errorInternal.jsp?mensaje=Internal error";	//Internal error
+				output="errorInternal.html?mensaje=Internal error";	//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/watermark-Picture.jsp";//Error Logic
+			output="watermark-Picture.html";//Error Logic
 			
 		}
 
-	getServletContext().getRequestDispatcher(salida).forward(request, response);
+		response.sendRedirect(response.encodeRedirectURL(output));
 
 	}	// THE END
 

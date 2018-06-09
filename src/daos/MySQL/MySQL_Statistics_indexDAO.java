@@ -11,8 +11,8 @@ import daos.interfaces.Statistics_indexDAO;
 import domain.Canvas_files;
 import domain.Statistics_index;
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.Recursos;
 
 public class MySQL_Statistics_indexDAO implements Statistics_indexDAO{
 

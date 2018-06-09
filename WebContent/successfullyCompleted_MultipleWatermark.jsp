@@ -31,28 +31,12 @@
 	<!-- MENU -->
 	<%@ include file="snippet/header/header.jsp" %>
 	<!-- END MENU -->
-	<iframe id="imageDownload" style="display:none;" src="<%=request.getAttribute("zip")%>"></iframe>
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>Successfully Completed</h1>
-			<p>If the download does not start directly <a id="download") href='<%=request.getAttribute("zip")%>' download>click here</a></p>
+			<p>If the download does not start directly <a id="download" href='Download?zip=<%=session.getAttribute("zip")%>' download>click here</a></p>
 		</div>
 	</div>
-	<%
-//		//	DOWNLOAD IMAGE
-//		File file=new File((String) request.getAttribute("image"));
-//	    response.setContentType("application/octet-stream");
-//	    response.setHeader("Content-Disposition","attachment;filename="+file.getName());
-//	    FileInputStream fileIn = new FileInputStream((String) request.getAttribute("image"));
-//	    ServletOutputStream out = response.getOutputStream(); 
-//	    byte[] outputByte = new byte[(int)file.length()];
-//		//copy binary contect to output stream
-//	    while(fileIn.read(outputByte, 0, (int)file.length()) != -1){
-//	    response.getOutputStream().write(outputByte, 0, (int) file.length());
-//		out.write(outputByte, 0, (int)file.length());
-//	    }
-//	    fileIn.close();
-	%>
 
 	<!-- FOOTER -->
 	<%@ include file="snippet/footer/footer.jsp" %>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page import="recursos.Position"%>
+<%@page import="resources.Position"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="domain.User"%>
 <%@page import="domain.Image"%>

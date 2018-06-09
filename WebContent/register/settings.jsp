@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@page import="recursos.Position"%>
+<%@page import="resources.Position"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="domain.User"%>
 <%@page import="domain.Image"%>
@@ -31,53 +31,73 @@
          <div class="container-fluid">
          
          
-<script src="register/vendor/jquery/jquery.min.js"></script>
-<script type='text/javascript' src='js/inputFile.js'></script>
+	<script src="register/vendor/jquery/jquery.min.js"></script>
+	<script type='text/javascript' src='js/inputFile.js'></script>
 
-<!-- Area Chart Example-->
-<div class="card mb-3 text-center">
-	<div class="card-header">
-		<span class="glyphicon glyphicon-level-up"></span>Change password
-	</div>
-	<div class="card-body col-lg-10 mx-auto" style="padding: 1rem;">
-
-		<form method="post" action="CreateMultipleWatermark" enctype="multipart/form-data">
-			<div class="form-group">
-				<div class="form-group row">
-					<label for="example-text-input" class="col-3 col-form-label">-Old password: </label>
-				  	<div class="col-9">
-				    	<input class="form-control" type="password" name="lastPassword" placeholder="old password">
-				  	</div>
+	<!-- Area Chart Example-->
+	<div class="card mb-3">
+		<div class="card-header">
+			<i class="fa fa-edit"></i> Change password
+		</div>
+		<div class="card-body col-lg-10 mx-auto text-center" style="padding: 1rem;">
+	
+			<form method="post" action="ChangePassword" >
+				<%if(session.getAttribute("notify")!=null){%> 		
+					<div class="alert alert-success col-lg-12 text-center">
+						<p style="margin-bottom:0px;"><%=session.getAttribute("notify")%></p>
+					</div>
+	        	<% session.removeAttribute("notify");
+	        	}else if(request.getParameter("session")!=null){
+	        		session.invalidate();
+	        		session=request.getSession();
+	        	}%>
+			
+	        	<%if(session.getAttribute("error")!=null){%> 		
+					<div class="alert alert-danger col-lg-12 text-center">
+						<p style="margin-bottom:0px;"><%=session.getAttribute("error")%></p>
+					</div>
+	        	<% session.removeAttribute("error");
+	        	}else if(request.getParameter("session")!=null){
+	        		session.invalidate();
+	        		session=request.getSession();
+	        	}%>
+				<div class="form-group">
+					<!-- COMPONENT START -->
+					<div class="form-group row">
+					    <label class="col-xs-12 col-sm-3 col-form-label">Last password:</label>
+					    <div class="col-xs-12 col-sm-9">
+					    	<input type="password" class="form-control" name="lastPassword" placeholder="Last Password">
+						</div>
+					</div>
+					<div class="form-group row">
+					    <label class="col-xs-12 col-sm-3 col-form-label">New password:</label>
+					    <div class="col-xs-12 col-sm-9">
+					    	<input type="password" class="form-control" name="newPassword" placeholder="New Password">
+						</div>
+					</div>
+					<div class="form-group row">
+					    <label class="col-xs-12 col-sm-3 col-form-label">Repeat new password:</label>
+					    <div class="col-xs-12 col-sm-9">
+					    	<input type="password" class="form-control" name="repeatNewPassword" placeholder="Repeat New Password">
+						</div>
+					</div>
 				</div>
-				<div class="form-group row">
-				  	<label for="example-search-input" class="col-3 col-form-label">-New password: </label>
-				  	<div class="col-9">
-				    	<input class="form-control" type="password" name="newPassword" placeholder="new password">
-				  	</div>
+				<!-- COMPONENT END -->
+				<div class="form-group" style="margin-bottom: 0;">
+					<button type="submit" class="btn btn-primary">Change password</button>
 				</div>
-				<div class="form-group row">
-				  	<label for="example-email-input" class="col-3 col-form-label">-Repeat new password: </label>
-				  	<div class="col-9">
-				  		<input class="form-control" type="password" name="repeatPassword" placeholder="repeat new password">
-				  	</div>
-				</div>
-			</div>
-			<!-- COMPONENT END -->
-			<div class="form-group" style="margin-bottom: 0;">
-				<button type="submit" class="btn btn-primary">Change password</button>
-			</div>
-		</form>
-	</div>
-	<%
-		if (request.getAttribute("error") != null) {
-	%>
-	<div class="alert alert-danger col-lg-6 col-lg-offset-3 text-center">
-		<p><%=request.getAttribute("error")%></p>
-	</div>
-	<%
-		}
-	%>
-	<div class="card-footer small text-muted">End change password</div>
+			</form>
+		</div>
+		<%
+			if (request.getAttribute("error") != null) {
+		%>
+		<div class="alert alert-danger col-lg-6 col-lg-offset-3 text-center">
+			<p><%=request.getAttribute("error")%></p>
+		</div>
+		<%
+			}
+		%>
+		<div class="card-footer small text-muted"></div>
 	</div>
 			
          </div>

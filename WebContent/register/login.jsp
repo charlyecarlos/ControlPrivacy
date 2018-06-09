@@ -19,7 +19,7 @@
     <div class="shadow card card-login mx-auto mt-5">
       <h1 class="card-header login">Login</h1>
       <div class="card-body">
-        <form method="post" action="/ControlPrivacy/Validation">
+        <form method="post" action="Validation">
         	<%if(session.getAttribute("error")!=null){%> 		
 				<div class="alert alert-danger col-lg-12 text-center">
 					<p style="margin-bottom:0px;"><%=session.getAttribute("error")%></p>

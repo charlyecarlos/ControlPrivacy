@@ -1,0 +1,23 @@
+
+.logo-header{
+	width: 150px;
+	height: 50px;
+}
+
+.logo-footer{
+	width: 250px;
+	height: 80px;
+}
+
+.navbar-brand-logo{
+	padding: 0px 0px;	
+}
+
+.no-padding{
+	padding:0px;
+}
+
+.login{
+	font-size:4em;
+	font-family: 'Berkshire Swash', cursive;
+}

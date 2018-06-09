@@ -7,7 +7,7 @@
 			<p>
 				<a href="index.html">Home</a>
 				·
-				<a href="#">About Us</a>
+				<a href="PrivacyPolicy.html">Privacy Policy</a>
 				·
 				<a href="#">FAQ</a>
 				·

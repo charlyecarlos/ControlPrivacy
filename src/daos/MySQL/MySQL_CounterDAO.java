@@ -9,8 +9,8 @@ import java.util.List;
 import daos.interfaces.CounterDAO;
 import domain.Counter;
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.Recursos;
 
 public class MySQL_CounterDAO implements CounterDAO{
 	private static final String DB_ERR = "Error de la base de datos";

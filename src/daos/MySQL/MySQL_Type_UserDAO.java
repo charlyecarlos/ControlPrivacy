@@ -9,8 +9,8 @@ import java.util.List;
 import daos.interfaces.Type_UserDAO;
 import domain.Type_User;
 import exceptions.DAOException;
-import recursos.DbQuery;
-import recursos.Recursos;
+import resources.DbQuery;
+import resources.Recursos;
 
 public class MySQL_Type_UserDAO implements Type_UserDAO{
 

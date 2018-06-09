@@ -53,7 +53,7 @@ public class Mail {
 	public boolean sendMailToGmail() {
 		try {
 			Properties props = new Properties ();
-			props.put("mail.smtp.host", "smtp.gmail.com");  //Sólo acepta servidores de gmail
+			props.put("mail.smtp.host", "smtp.controlprivacy.net"); 
 			props.setProperty("mail.smtp.starttls.enable", "true");
 			props.setProperty("mail.smtp.port", "587");
 			props.setProperty("mail.smtp.user", userMail);

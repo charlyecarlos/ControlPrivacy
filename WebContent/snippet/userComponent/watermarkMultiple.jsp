@@ -9,8 +9,7 @@
 	</div>
 	<div class="card-body col-lg-10 mx-auto text-center" style="padding: 1rem;">
 
-		<form method="post" action="CreateMultipleWatermark"
-			enctype="multipart/form-data">
+		<form method="post" action="CreateMultipleWatermark" enctype="multipart/form-data">
 			<div class="form-group">
 				<!-- COMPONENT START -->
 				<div class="form-group">
@@ -32,10 +31,10 @@
 						<input type="radio" name="position" value="upper_right" autocomplete="off"> Upper Right 
 					</label>
 					<label class="btn btn-secondary"> 
-						<input type="radio" name="position" value="delow_left" autocomplete="off"> Delow Left 
+						<input type="radio" name="position" value="bottom_left" autocomplete="off"> Bottom Left 
 					</label>
 					<label class="btn btn-secondary"> 
-						<input type="radio" name="position" value="delow_right" autocomplete="off"> Delow Right 
+						<input type="radio" name="position" value="bottom_right" autocomplete="off"> Bottom Right 
 					</label>
 				</div>
 				<br>

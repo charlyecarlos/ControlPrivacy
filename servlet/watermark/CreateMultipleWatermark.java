@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.UUID;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
@@ -24,7 +25,7 @@ import domain.User;
 import exceptions.DomainException;
 import exceptions.ServiceException;
 import meta.FileMetadata;
-import recursos.Position;
+import resources.Position;
 import services.ServiceStatistic_file;
 import services.WaterMark;
 import util.Fecha;
@@ -47,7 +48,7 @@ public class CreateMultipleWatermark extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String salida=null;
+        String output=null;
 		int numfilesubidos=0; 
 		FormMultiPart  datos=null;
 		HttpSession session=request.getSession();
@@ -68,7 +69,6 @@ public class CreateMultipleWatermark extends HttpServlet {
 				String watermark= datos.getFieldForm("textWatermark");
 				if(watermark.isEmpty())
 					throw new ServiceException("The watermark can´t be empty");
-				System.out.println(datos.getNameFile("position"));
 				
 				try{
 					 numfilesubidos=datos.SubirFicheros();
@@ -89,13 +89,20 @@ public class CreateMultipleWatermark extends HttpServlet {
 			Statistic_file statistic_file;
 			ServiceStatistic_file sStatistic;
 			
-			String pathfile="dir/multiplefiles/"+user.getEmail()+"/"+UUID.randomUUID()+".zip";
+			String pathfile=getServletContext().getRealPath(getServletContext().getInitParameter("dirWatermark"))+"/"+user.getEmail()+"/";
+			File f = new File(pathfile);
+			if(!f.exists()) {
+				f.mkdirs();
+			}
+			
+			String zipName = UUID.randomUUID()+".zip";
+			pathfile += zipName;
+			
 			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(new File(pathfile)));
 			zip.setLevel(Deflater.DEFAULT_COMPRESSION);
 			zip.setMethod(Deflater.DEFLATED);
 			
 			String position=datos.getFieldForm("position");
-			System.out.println(position);
 			
 			ZipEntry entrada;
 			FileInputStream fis;
@@ -111,10 +118,10 @@ public class CreateMultipleWatermark extends HttpServlet {
 					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.UPPER_LEFT);break;
 				case "upper_right":
 					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.UPPER_RIGHT);break;
-				case "delow_left":
-					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.DELOW_LEFT);break;
-				case "delow_right":
-					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.DELOW_RIGHT);break;
+				case "bottom_left":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.BOTTOM_LEFT);break;
+				case "bottom_right":
+					WaterMark.addTextWatermark(watermark, fm.readExtensionFile(), image, image,Position.BOTTOM_RIGHT);break;
 				}
 
 				entrada = new ZipEntry(image.getName());
@@ -134,23 +141,24 @@ public class CreateMultipleWatermark extends HttpServlet {
 				sStatistic.create(statistic_file);
 			}
 			zip.close();
-			session.setAttribute("zip", pathfile);
-			salida="/successfullyCompleted_MultipleWatermark.jsp";
+			session.setAttribute("zip", zipName);
+
+			output="successfullyCompleted_MultipleWatermark.html";
 		
 		}catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				salida="/watermark-Picture.jsp";//Error Logic
+				output="watermark-Picture.html";//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/errorInternal.jsp?mensaje=Internal error";	//Internal error
+				output="errorInternal.html?mensaje=Internal error";	//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/watermark-Picture.jsp";//Error Logic	
+			output="watermark-Picture.html";//Error Logic	
 		}
-		
-		getServletContext().getRequestDispatcher(salida).forward(request, response);
+
+			response.sendRedirect(response.encodeRedirectURL(output));
 		
 		}	// THE END
 
