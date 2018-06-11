@@ -28,7 +28,16 @@
    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
       <%@ include file="../snippet/header/headerUser.jsp" %>
       <div class="content-wrapper">
-         <div class="container-fluid">            
+         <div class="container-fluid">
+         	<%if(session.getAttribute("notify")!=null){%> 		
+				<div class="alert alert-success col-lg-12 text-center">
+					<p style="margin-bottom:0px;"><%=session.getAttribute("notify")%></p>
+				</div>
+	        <% session.removeAttribute("notify");
+	       	}else if(request.getParameter("session")!=null){
+	       		session.invalidate();
+	       		session=request.getSession();
+	       	}%> 
             <!-- watermark-multiple -->
             <%@ include file="../snippet/userComponent/watermarkMultiple.jsp" %>
 

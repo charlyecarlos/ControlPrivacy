@@ -27,13 +27,13 @@
 	<!-- MENU -->
 	<%@ include file="snippet/header/header.jsp" %>
 	<!-- END MENU -->
-	<iframe id="imageDownload" style="display:none;" src="<%=request.getAttribute("image")%>"></iframe>
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>Successfully Completed</h1>
-			<br>
+			<br/>
 			<p> This is the link to view the image:</p>
-			<input class="form-control" id="urlImage" type="text" value="http://localhost:8080/ControlPrivacy/image.html?img=<%=request.getAttribute("image")%>" readonly/>
+			<input class="form-control" id="urlImage" type="text" value="<%=getServletContext().getInitParameter("urlImage")%>/image.html?img=<%=session.getAttribute("image")%>" readonly/>
+			<% session.removeAttribute("image"); %>
 			<script type='text/javascript' src='js/copyImage.js'></script>
 		</div>
 	</div>

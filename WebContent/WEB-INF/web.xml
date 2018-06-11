@@ -146,6 +146,14 @@
     <url-pattern>/PrivacyPolicy.html</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>successfullyCompleted_ViewImage.html</servlet-name>
+    <jsp-file>/successfullyCompleted_ViewImage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>successfullyCompleted_ViewImage.html</servlet-name>
+    <url-pattern>/successfullyCompleted_ViewImage.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>successfullyCompleted_SimpleWatermark.html</servlet-name>
     <jsp-file>/successfullyCompleted_SimpleWatermark.jsp</jsp-file>
   </servlet>
@@ -168,6 +176,14 @@
   <servlet-mapping>
     <servlet-name>ViewImage</servlet-name>
     <url-pattern>/ViewImage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewImageMultiple</servlet-name>
+    <servlet-class>viewimage.ViewImageMultiple</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewImageMultiple</servlet-name>
+    <url-pattern>/ViewImageMultiple</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Download</servlet-name>
@@ -207,7 +223,7 @@
   </context-param>
   <context-param>
     <param-name>passwordMail</param-name>
-    <param-value></param-value>
+    <param-value>UOnhKy8nXyH2qk4ksgIP</param-value>
   </context-param>
   <context-param>
     <param-name>dirWatermark</param-name>
@@ -220,5 +236,9 @@
   <context-param>
     <param-name>dirFileAnalyse</param-name>
     <param-value>dir/fileAnalyse</param-value>
+  </context-param>
+  <context-param>
+    <param-name>urlImage</param-name>
+    <param-value>http://localhost:8080/ControlPrivacy</param-value>
   </context-param>
 </web-app>

@@ -75,7 +75,7 @@ public class CleanMeta extends HttpServlet {
 			
 			List<Metadata> metadata=sMetadata.readMetadata(folder);
 			
-			Statistic_file statistic_file=new Statistic_file("FileAnalyse", metadata.get(0).toString(), Fecha.fechaActual());
+			Statistic_file statistic_file=new Statistic_file("FileAnalyse", metadata.get(0).getData(), Fecha.fechaActual());
 			ServiceStatistic_file sStatistic=new ServiceStatistic_file();
 			sStatistic.create(statistic_file);
 

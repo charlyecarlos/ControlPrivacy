@@ -261,6 +261,7 @@
 	</section>
 	<section class="gradient-blue">
 		<article class="col-lg-10 col-lg-offset-1">
+			<img class="example" src="img/CleanMeta.gif"/>
 		</article>
 	</section>
 
@@ -268,7 +269,7 @@
 	
 	<footer class="footer-distributed">
 		<div class="footer-left">
-			<img class="logo-footer" src="./img/logo.png">
+			<img class="logo-footer" src="./img/logo.png" />
 			<p class="footer-links">
 				<a href="#">Home</a> · <a href="PrivacyPolicy.html">Privacy Policy</a> · <a href="#">Faq</a> · <a href="contact/contact.html">Contact</a>
 			</p>

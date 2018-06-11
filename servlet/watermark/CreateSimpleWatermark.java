@@ -82,9 +82,10 @@ public class CreateSimpleWatermark extends HttpServlet {
 				Statistic_file statistic_file=new Statistic_file("Watermark", fm.readExtensionFile(), Fecha.fechaActual());
 				ServiceStatistic_file sStatistic=new ServiceStatistic_file();
 				sStatistic.create(statistic_file);
+			
 				
 				//request.setAttribute("image", path+File.separator+image.getName());
-				request.setAttribute("image", image.getName());
+				session.setAttribute("image", image.getName());
 				output="successfullyCompleted_SimpleWatermark.html";
 				
 		} catch (ServiceException e) {

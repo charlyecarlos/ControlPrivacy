@@ -8,11 +8,11 @@
 	</div>
 	<div class="card-body col-lg-10 mx-auto">
 		<div class="table-responsive">
-			<form method="post" action="ViewImage" enctype="multipart/form-data">
+			<form method="post" action="ViewImageMultiple" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="input-group input-image-multiple" name="imageFile">
-						<input type="text" class="form-control"
-							placeholder='Choose a file...' /> <span class="input-group-btn">
+						<input type="text" class="form-control" placeholder='Choose a file...' /> 
+						<span class="input-group-btn">
 							<button class="btn btn-default btn-choose" type="button">Choose</button>
 						</span>
 					</div>

@@ -31,7 +31,7 @@
 						for (Image image : images) {
 					%>
 					<tr>
-						<td>http://localhost:8080/ControlPrivacy/image.html?img=<%=image.getUrl_redirect()%></td>
+						<td><%=getServletContext().getInitParameter("urlImage")%>/image.html?img=<%=image.getUrl_redirect()%></td>
 						<td><%=image.getDate_creation()%></td>
 						<td><%=image.getExpiration_date()%></td>
 						<td><%=image.getVisits()%></td>

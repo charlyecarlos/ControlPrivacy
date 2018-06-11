@@ -31,17 +31,16 @@
 	<!-- MENU -->
 	<%@ include file="snippet/header/header.jsp" %>
 	<!-- END MENU -->
-	<iframe id="imageDownload" style="display:none;" src="<%=request.getAttribute("image")%>"></iframe>
-	<% request.setAttribute("image", request.getAttribute("image")); %>
 	<div class="container">
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 			<h1>Successfully Completed</h1>
-			<p>If the download does not start directly <a id="download" href='Download?image=<%=request.getAttribute("image")%>' download>click here</a></p>
+			<p>If the download does not start directly <a id="download" href='Download?image=<%=session.getAttribute("image")%>' download>click here</a></p>
 		</div>
 		<br></br>
 		<div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-			<img src="ViewWatermarkImage?image=<%= request.getAttribute("image") %>"/>
+			<img src="ViewWatermarkImage?image=<%= session.getAttribute("image") %>"/>
 		</div>
+		<% session.removeAttribute("image"); %>
 	</div>
 	<%
 //		//	DOWNLOAD IMAGE

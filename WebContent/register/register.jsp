@@ -54,6 +54,8 @@
       </div>
     </div>
   </div>
+  <br>
+  <a href="index.html" class="returnToIndex"><span class="glyphicon glyphicon-arrow-left"></span>return to index</a>
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

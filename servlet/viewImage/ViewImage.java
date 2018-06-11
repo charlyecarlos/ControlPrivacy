@@ -40,7 +40,7 @@ public class ViewImage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String salida=null;
+        String output=null;
 		int numfilesubidos=0;
 		FormMultiPart  datos=null;
 		HttpSession session=request.getSession();
@@ -88,24 +88,24 @@ public class ViewImage extends HttpServlet {
 			
 			sStatistic.create(statistic_file);
 			
-			request.setAttribute("image", url_redirect);
-			salida="/successfullyCompleted_ViewImage.jsp";
+			session.setAttribute("image", image.getUrl_redirect());
+			output="successfullyCompleted_ViewImage.html";
 				
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				salida="/viewImage.jsp";	//Error Logic
+				output="viewImage.html";	//Error Logic
 			}else{
 				e.printStackTrace();
-				salida="/errorInternal.jsp";//Internal error
+				output="errorInternal.html";//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			salida="/viewImage.jsp";		//Error Logic
+			output="viewImage.html";		//Error Logic
 			
 		}
 
-		getServletContext().getRequestDispatcher(salida).forward(request, response);
+		response.sendRedirect(response.encodeRedirectURL(output));
 
 	}	// THE END
 
