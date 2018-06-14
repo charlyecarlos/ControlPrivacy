@@ -96,17 +96,17 @@ public class ViewImageMultiple extends HttpServlet {
 			session.setAttribute("notify", "Images uploaded correctly ");
 			output="user.html";
 				
-		} catch (ServiceException e) {
+		} catch (ServiceException|NullPointerException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				output="viewImage.html";	//Error Logic
+				output="user.html";	//Error Logic
 			}else{
 				e.printStackTrace();
 				output="errorInternal.html";//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			output="viewImage.html";		//Error Logic
+			output="user.html";		//Error Logic
 			
 		}
 

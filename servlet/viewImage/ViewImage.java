@@ -91,16 +91,16 @@ public class ViewImage extends HttpServlet {
 			session.setAttribute("image", image.getUrl_redirect());
 			output="successfullyCompleted_ViewImage.html";
 				
-		} catch (ServiceException e) {
+		} catch (ServiceException|NullPointerException e) {
 			if(e.getCause()==null){
-				request.setAttribute("error", e.getMessage());
+				session.setAttribute("error", e.getMessage());
 				output="viewImage.html";	//Error Logic
 			}else{
 				e.printStackTrace();
 				output="errorInternal.html";//Internal error
 			}
 		}catch (DomainException e) {
-			request.setAttribute("error", e.getMessage());
+			session.setAttribute("error", e.getMessage());
 			output="viewImage.html";		//Error Logic
 			
 		}

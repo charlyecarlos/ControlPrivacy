@@ -63,14 +63,14 @@ public class Register extends HttpServlet {
 			else
 				throw new ServiceException("The password cannot be empty.");
 			
-			output="login.html";
+			output="/login.html";
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error",e.getMessage());
 				output="/register.html";
 			}else{
 				e.printStackTrace();
-				output="/errorinterno.jsp";
+				output="/errorInternal.html";
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error",e.getMessage());

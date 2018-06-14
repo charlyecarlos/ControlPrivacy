@@ -88,17 +88,17 @@ public class CreateSimpleWatermark extends HttpServlet {
 				session.setAttribute("image", image.getName());
 				output="successfullyCompleted_SimpleWatermark.html";
 				
-		} catch (ServiceException e) {
+		} catch (ServiceException|NullPointerException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				output="watermark-Picture.html";//Error Logic
+				output="watermarkPicture.html";//Error Logic
 			}else{
 				e.printStackTrace();
 				output="errorInternal.html?mensaje=Internal error";	//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			output="watermark-Picture.html";//Error Logic
+			output="watermarkPicture.html";//Error Logic
 			
 		}
 

@@ -57,9 +57,10 @@
 				</div>
 			</form>	
 		</div>
-		<%if(request.getAttribute("error")!=null){%>
+		<%if(session.getAttribute("error")!=null){%>
 			<div class="alert alert-danger col-lg-6 col-lg-offset-3 text-center">
-				<p><%=request.getAttribute("error")%></p>
+				<p><%=session.getAttribute("error")%></p>
+				<%session.removeAttribute("error"); %>
 			</div>
 		<%}%>
 	</div>

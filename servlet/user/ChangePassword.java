@@ -32,15 +32,15 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		
-		String newPassword = request.getParameter("newPassword");
-		
-		ServiceUser suser=new ServiceUser();
 		String output = "";
-		
-		try {
-			if (validateUser(user, suser, request.getParameter("lastPassword")))
+		try{
+			User user = (User) session.getAttribute("user");
+						
+			String newPassword = request.getParameter("newPassword");
+			
+			ServiceUser suser=new ServiceUser();
+
+			if (validateUser(user, suser, request.getParameter("lastPassword"))){
 				if(newPassword.equals(request.getParameter("repeatNewPassword"))){
 					user.setPassword(Encrypt.encryptSHA256(newPassword));
 					if(suser.update(user)!=0){
@@ -50,7 +50,9 @@ public class ChangePassword extends HttpServlet {
 						throw new DomainException("A problem has occurred, again intentardo in a few minutes ");
 						
 				}else
-					throw new DomainException("The password is wrong.");
+					throw new DomainException("The new password do not match ");
+			}else
+				throw new DomainException("The password is wrong.");
 		} catch (ServiceException e) {
 			if(e.getCause()==null){
 				session.setAttribute("error",e.getMessage());
@@ -62,6 +64,8 @@ public class ChangePassword extends HttpServlet {
 		}catch (DomainException e) {
 			session.setAttribute("error",e.getMessage());
 			output="settings.html";
+		}catch(NullPointerException e){
+			output="login.html";
 		}
 		response.sendRedirect(response.encodeRedirectURL(output));
 	}

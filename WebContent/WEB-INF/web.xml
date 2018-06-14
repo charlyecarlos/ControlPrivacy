@@ -66,6 +66,14 @@
     <url-pattern>/register.html</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>errorInternal.html</servlet-name>
+    <jsp-file>/errorInternal.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>errorInternal.html</servlet-name>
+    <url-pattern>/errorInternal.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>forgot-password.html</servlet-name>
     <jsp-file>/register/forgot-password.jsp</jsp-file>
   </servlet>

@@ -16,6 +16,7 @@ import exceptions.DAOException;
 import resources.DbQuery;
 import resources.ErrOracle;
 import resources.Recursos;
+import util.Fecha;
 
 public class MySQL_ImageDAO implements ImageDAO{
 
@@ -122,15 +123,15 @@ public class MySQL_ImageDAO implements ImageDAO{
 			stat = con.prepareStatement(DbQuery.getRecoverimageforuser());
 			stat.setString(1,user.getId_user());
 			rs=stat.executeQuery();
-			while (rs.next()){
-			images.add(new Image(rs.getString(1),
-							  rs.getString(2),
-							  User.createUserWithId_user(rs.getString(3)),
-							  rs.getTimestamp(4),
-							  rs.getTimestamp(5),
-							  rs.getInt(6)
-							 ));
-			}
+			while (rs.next())
+				if(rs.getTimestamp(5).getTime()>=Fecha.fechaActual().getTime())
+					images.add(new Image(rs.getString(1),
+									  rs.getString(2),
+									  User.createUserWithId_user(rs.getString(3)),
+									  rs.getTimestamp(4),
+									  rs.getTimestamp(5),
+									  rs.getInt(6)
+									 ));
 		} catch (SQLException e) {
 			throw new DAOException(DB_ERR, e);
 		} finally {

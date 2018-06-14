@@ -4,11 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.UUID;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletException;
@@ -145,17 +143,17 @@ public class CreateMultipleWatermark extends HttpServlet {
 
 			output="successfullyCompleted_MultipleWatermark.html";
 		
-		}catch (ServiceException e) {
+		}catch (ServiceException|NullPointerException e) {
 			if(e.getCause()==null){
 				request.setAttribute("error", e.getMessage());
-				output="watermark-Picture.html";//Error Logic
+				output="user.html";//Error Logic
 			}else{
 				e.printStackTrace();
 				output="errorInternal.html?mensaje=Internal error";	//Internal error
 			}
 		}catch (DomainException e) {
 			request.setAttribute("error", e.getMessage());
-			output="watermark-Picture.html";//Error Logic	
+			output="user.html";//Error Logic	
 		}
 
 			response.sendRedirect(response.encodeRedirectURL(output));
